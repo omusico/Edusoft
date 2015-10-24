@@ -1,0 +1,258 @@
+ <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="jarviswidget" id="wid-id-0">
+
+        <header>
+            <h2>Academic  Settings</h2>
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                       
+                                    <div class="col-md-5">
+                                    <div class="alert alert-info alert-block">
+                                                        <i class="fa-fw fa fa-info"></i>
+                                                     Click <span class="label label-success">New Row Settings</span> to add more row
+                                        </div>
+                                    </div>
+
+                                         <div class="col-md-2">                       
+                                            <a id="add" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-cloud-download"></i> New Row Settings</a>
+                                        </div>
+                                         <div class="col-md-3">                       
+                                            <a id="remove" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove last Row Settings</a>
+                                        </div>
+                                         <div class="col-md-2 text-right">                       
+                                            <button onclick="document.getElementById('settings').submit();" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-floppy-saved"></i> Save Settings</button>
+                                        </div>
+                               
+                                   
+                                </div>
+                        
+                </div> 
+                    <div class="row">
+
+                        <form id="settings" name="settings" class="smart-form"  action="/settings/settings" method="post">
+                               
+                                    <table class="table" id="table-settings">
+                                        <tbody>
+                                        <tr class="set">
+                                        <td>
+                                         <section class=""><label class="select"><i></i>
+                                         <select class="" id="section" name="section[]" required="required">
+                                            <option value="">select section</option>
+                                                <?php if($sections): ?>
+                                                         <?php foreach($sections as $section): ?>
+                                                            <option value="<?php echo $section['id']; ?>"><?php echo $section['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                        </section>
+                                         </td>
+                                         <td>
+                                        <section class=""><label class="select"><i></i>
+                                         <select class="" id="class" name="grade[]" required="required">
+                                            <option value="">select grade format</option>
+                                                <?php if($grades): ?>
+                                                         <?php foreach($grades as $grade): ?>
+                                                            <option value="<?php echo $grade['id']; ?>"><?php echo $grade['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                         </section>
+                                         </td>
+                                         <td>
+                                         <section class=""><label class="select"><i></i>
+                                            <select class="" id="subject" name="assessment[]" required="required">
+                                            <option value="">select assessment format</option>
+                                                <?php if($assessments): ?>
+                                                         <?php foreach($assessments as $assessment): ?>
+                                                            <option value="<?php echo $assessment['id']; ?>"><?php echo $assessment['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                         </section>
+                                         </td>
+                                         <td>
+                                           <section class=""><label class="select"><i></i>
+                                            <select class="" id="subject" name="trait[]"  required="required">
+                                            <option value="">select trait format</option>
+                                                <?php if($traits): ?>
+                                                         <?php foreach($traits as $trait): ?>
+                                                            <option value="<?php echo $trait['id']; ?>"><?php echo $trait['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                         </section>
+                                         </td>                                         
+                                     </tr>
+                                 </tbody>
+                                    </table>
+                                                                        
+                                </form>
+                                   
+                     </div>
+
+
+                       <hr></hr>
+                     <div class="row">
+                        <div class="col col-sm-12">
+
+                        <table id="rs" data-show-export="true" data-pagination="true" data-click-to-select="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered ">
+                        <thead> 
+                            <tr>
+                                <th><span class="text-danger">#</span> Session</th>
+                                <th><i class="fa fa-user txt-color-green hidden-md hidden-sm hidden-xs"></i> Section</th>
+                                <th><i class="fa fa-road text-success hidden-md hidden-sm hidden-xs"></i>Grade Format</th>
+                                <th><i class="fa fa-car text-warning hidden-md hidden-sm hidden-xs"></i> Assessement Format</th>
+                                <th><span class="text-danger">#</span> Trait Format</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if($settings):?>         
+                    <?php foreach ($settings as $sr) : ?>
+                            <tr> 
+        <td><?php echo $sr['y_name']. '-' .$sr['t_name'];?></td>
+        <td><?php echo $sr['sec_name'];?></td>
+        <td><?php echo $sr['g_name'];?></td>
+        <td><?php echo $sr['a_name'];?></td>
+        <td><?php echo $sr['tr_name'];?></td>
+        
+                            </tr> 
+                           <?php endforeach; ?><?php endif;?>
+                        </tbody>
+                    </table>
+                </div>
+                     </div>
+
+
+
+
+
+
+
+
+
+
+
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
+</article>
+
+<script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+        // clears the variable if left blank
+         $("#add").click(function() {
+ $('#table-settings tbody>tr:last')
+    .clone(true)
+    .insertAfter('#table-settings tbody>tr:last').hide().fadeIn().find('input').each(function(){
+        $(this).val('');
+    });
+});
+
+
+  $("#remove").click(function() {
+ $('#table-settings tbody>tr:last-child')
+    .remove()
+  
+    });
+
+
+    };
+    
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>

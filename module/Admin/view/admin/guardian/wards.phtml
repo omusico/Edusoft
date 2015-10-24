@@ -1,0 +1,179 @@
+
+	
+
+
+
+
+				
+	
+	
+		
+		<div class="col-sm-12">
+				
+									<!-- well -->
+									<div class="well well well-sm well-light">
+										<div class="row">
+												<div class="widget-body-toolbar"> 
+                    							<div class="col-sm-6">
+                    								Ward Information of <?php echo $guardian->getGender().' '.$guardian->getFname().' '.$guardian->getLname().' '.$guardian->getMname()?>
+                    							</div>
+                    							<div class="col-sm-4 text-right">
+													<a data-dismiss="modal" data-toggle="modal" data-target="#edit" href="<?php echo $this->url('guardian',array('controller' => 'guardian','action'=>'addward', 'id'=>$this->id));?>"class="btn btn-primary">
+														<i class="fa fa-plus"></i> <span class="hidden-mobile">New ward</span>
+													</a>
+                    							</div>
+                    							</div>
+                
+                                   
+
+										</div>
+				
+													<div class="row">
+				
+														<?php foreach ($persons as $student) {?>
+
+														
+											
+									
+								
+										<div class="col-sm-6">
+																<div class="well well-sm bg-color-teal txt-color-white">					
+											<table class="table table-hover">
+												
+												<tbody>
+													<tr >
+														<td rowspan="5" style="padding:3px 0; border:none;"><img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo $student->getImage();?>" alt="staff pic" style="max-width:100px; border:5px solid #FFF;"></td>
+													</tr>
+													<tr>	
+														<td style="padding:3px 0; border:none;"><span class="">Name:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $student->getPerson()->getFname(). '  ' .$student->getPerson()->getLname().' '.$student->getPerson()->getMname();;?></td>
+													</tr>
+													<tr >
+														
+														<td style="padding:3px 0; border:none;"><span class="">Admission No:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $student->getAdmNo();;?></td>
+													</tr>
+													<tr>
+														
+														<td style="padding:3px 0; border:none;"><span class="">Section:</span> </td>
+														<td style="padding:3px 0; border:none;"><?php echo $student->getCurrentClass()->getSection()->getName();?></td>
+													</tr>
+													<tr>
+														
+														<td style="padding:3px 0; border:none;"><span class="">Class:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $student->getCurrentClass()->getName();?></td>
+													</tr>
+													
+												</tbody>
+											</table>
+											</div>											
+										</div>
+									  <?php } ?>
+										</div>
+									</div>
+									</div>	
+									
+									<!-- end well -->
+
+
+
+<!-- MODAL FOR EDITING ACADEMIC SESSION -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:900px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+<script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+        // clears the variable if left blank
+    };
+    
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>

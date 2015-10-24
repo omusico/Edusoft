@@ -1,0 +1,384 @@
+<?php 
+namespace Admin\Form\Staff;
+
+use Admin\Entity\Staff;
+use Admin\Form\StaffAdminFieldset;
+use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilterProviderInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+
+
+class PersonFieldset extends Fieldset
+{
+    public function __construct(ObjectManager $objectManager)
+    {
+        parent::__construct('staff');
+         $this->setAttribute('method', 'post');
+        $this->setHydrator(new DoctrineHydrator($objectManager))
+             ->setObject(new Staff());
+   
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Hidden',
+            'name' => 'id'
+        ));
+
+        $this->add(array(
+            'name' => 'fname',
+            'attributes' => array(
+                'type'  => 'text',
+                'placeholder' =>'First Name',
+                'class' =>'form-control',
+                'id'=>'fname',
+                'required' => true,
+            ),
+            'options' => array(
+                'label' => 'name',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+        $this->add(array(
+            'name' => 'lname',
+            'attributes' => array(
+                'type'  => 'text',
+                'placeholder' =>'Last Name',
+                'class' =>'form-control',
+               'id'=>'lname',
+               'required' => true,
+            ),
+            'options' => array(
+                'label' => 'Last Name',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+
+        $this->add(array(
+            'name' => 'mname',
+            'attributes' => array(
+                'type'  => 'text',
+                'placeholder' =>'Middle Name',
+                'class' =>'form-control',
+                'id'=>'mname',
+            ),
+            'options' => array(
+                'label' => 'Middle Name',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+        $this->add(array(
+            'name' => 'dob',
+            'attributes' => array(
+                'type'  => 'Zend\Form\Element\Text',
+                'placeholder' =>'Date of Birth',
+                'class' => 'datepicker', 
+                'id' =>'dob',
+                'format' =>'d/m/Y',
+                'required' => true,
+            ),
+            'options' => array(
+                'label' => 'Date of birth',
+            ),
+            'label_attributes' => array(
+
+                ),
+        ));
+
+                $this->add(array(
+            'name' => 'twitter',
+            'attributes' => array(
+                'type'  => 'Zend\Form\Element\Text',
+                'placeholder' =>'Twitter account',
+                'class' => 'datepicker', 
+                'id' =>'twitter',
+                'required' => false,
+            ),
+            'options' => array(
+                'label' => 'Date of birth',
+            ),
+            'label_attributes' => array(
+
+                ),
+        ));
+
+                $this->add(array(
+            'name' => 'facebook',
+            'attributes' => array(
+                'type'  => 'Zend\Form\Element\Text',
+                'placeholder' =>'Fcebook account',
+                'class' => 'datepicker', 
+                'id' =>'facebook',
+                'required' => false,
+            ),
+            'options' => array(
+                'label' => 'Date of birth',
+            ),
+            'label_attributes' => array(
+
+                ),
+        ));
+
+                $this->add(array(
+            'name' => 'email',
+            'attributes' => array(
+                'type'  => 'Zend\Form\Element\Text',
+                'placeholder' =>'Enter email address',
+                'class' => 'email', 
+                'id' =>'email',
+                'required' => false,
+            ),
+            'options' => array(
+                'label' => 'Date of birth',
+            ),
+            'label_attributes' => array(
+
+                ),
+        ));
+
+         $this->add(array(
+            'name' => 'religion',
+            'type' => 'Zend\Form\Element\Select',
+            'options' => array(
+                'label' => 'religion',
+                'empty_option' => 'Select Your Religion',
+                'value_options' => array(
+                    'Christianity' => 'Christianity',
+                    'Islam' => 'Islam',
+                    'Traditional' => 'Traditional',
+                    'Others' => 'Others',
+                ),
+            ),
+            'attributes' => array(
+                'required' => true,
+                'class' =>'select2',
+                 'id'=>'religion'
+                
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'mobile1',
+            'attributes' => array(
+                'type'  => 'text',
+                'data-mask'=>'+234 (803) 333-3333',
+                'placeholder' =>'Enter your mobile',
+                'class' =>'form-control',
+                'id'=>'mobile'
+            ),
+            'options' => array(
+                'label' => 'Mobile Number',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+          $this->add(array(
+            'name' => 'mobile2',
+            'attributes' => array(
+                'type'  => 'text',
+                'data-mask'=>'+234 (803) 333-3333',
+                'placeholder' =>'Enter your mobile',
+                'class' =>'form-control',
+                'id'=>'mobile'
+            ),
+            'options' => array(
+                'label' => 'Mobile Number',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+         $this->add(array(
+            'name' => 'nokRel',
+            'attributes' => array(
+                'type'  => 'text',
+                'placeholder' =>'Next-Of-Kin Relationship',
+                'class' =>'form-control',
+                'id'=>'nokRel',
+                'required' => true,
+            ),
+            'options' => array(
+                'label' => 'Next-Of-Kin Relationship',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+        $this->add(array(
+            'name' => 'nokName',
+            'attributes' => array(
+                'type'  => 'text',
+                'placeholder' =>'Full Name of Next-Of-Kin',
+                'class' =>'form-control',
+                'id'=>'nokName',
+                'required' => true,
+            ),
+            'options' => array(
+                'label' => 'Name of Next-Of-Kin',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+        $this->add(array(
+            'name' => 'nokMobile',
+            'attributes' => array(
+                'type'  => 'text',
+                'placeholder' =>'Next-Of-Kin Mobile ',
+                'class' =>'form-control',
+                'id'=>'nokMobile',
+                'required' => true,                             
+            ),
+            
+            'options' => array(
+                'label' => 'Mobile of Next-Of-Kin',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+         $this->add(array(
+            'name' => 'sex',
+            'type' => 'Zend\Form\Element\Select',
+            'options' => array(
+                'label' => 'Sex',
+                'empty_option' => 'Select your gender',
+                'value_options' => array(
+                    'Male' => 'Male',
+                    'Female' => 'Female',
+                ),
+            ),
+            'attributes' => array(
+                'required' => true,
+                'class' =>'select2',
+                
+            )
+            
+
+        ));
+
+        $this->add(array(
+            'name' => 'country',
+            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'options' => array(
+                'label' => 'Country',
+                'object_manager' => $objectManager,
+                'target_class' => 'Admin\Entity\Country',
+                'property' => 'name',
+                'empty_option'   => 'Choose your country',
+            ),
+            'attributes' => array(
+                'required' => true,
+                'class' =>'select2',
+
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'state',
+            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'options' => array(
+                'label' => 'State',
+                'object_manager' => $objectManager,
+                'target_class' => 'Admin\Entity\State',
+                'property' => 'name',
+                'empty_option'   => 'Choose your state',
+                'option_attributes' => array(
+                    'data-id' => function (\Admin\Entity\State $entity) {
+                        return $entity->getId();
+                    }
+               ),
+            ),
+            'attributes' => array(
+                'required' => true,
+                'class' =>'select2',
+                'id' =>'state'
+                
+            )
+        ));
+
+      
+         $this->add(
+                array(
+                    'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+                    'name' => 'lga',
+                    'options' => array(
+                        'object_manager'     => $objectManager,
+                        'target_class'       => 'Admin\Entity\Lga',
+                        'property'           => 'name',
+                        'empty_option'   => 'Choose your L.G.A',
+                        'option_attributes' => array(
+                            'data-id' => function (\Admin\Entity\Lga $entity) {
+                                return $entity->getState()->getId();
+                            }
+                        ),
+                    ),
+                     'attributes' => array(
+                        'required' => true,
+                        'class'=>'select2',
+                        'id' =>'lga'
+               
+                )
+         ));
+
+        $this->add(array(
+            'name' => 'raddress',
+            'attributes' => array(
+                'type'  => 'Zend\Form\Element\Textarea',
+                'placeholder' =>'Address',
+                'class' =>'form-control',
+                'required' => true,
+            ),
+            'options' => array(
+                'label' => 'Address',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+          $this->add(array(
+            'name' => 'paddress',
+            'attributes' => array(
+                'type'  => 'Zend\Form\Element\Textarea',
+                'placeholder' =>'Address',
+                'class' =>'form-control',
+                'required' => true,
+            ),
+            'options' => array(
+                'label' => 'Address',
+            ),
+            'label_attributes' => array(
+                'class' => 'input', 
+                ),
+        ));
+
+
+
+        $StaffAdminFieldset = new StaffAdminFieldset($objectManager);
+        $this->add($StaffAdminFieldset);
+
+
+ 
+
+
+
+        
+  }
+
+ 
+}

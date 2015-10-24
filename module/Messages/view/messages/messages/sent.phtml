@@ -1,0 +1,80 @@
+<table id="inbox-table" class="table table-striped table-hover">
+	<tbody>
+		  <?php if($lists):?>         
+          <?php foreach ($lists as $list) : ?>
+		<tr id="msg1" class="unread">
+			<td class="inbox-table-icon">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" class="checkbox style-2">
+						<span></span> </label>
+				</div>
+			</td>
+			<td class="inbox-data-from hidden-xs hidden-sm">
+				<div>
+					  <?php echo $list['l_name'];?>
+				</div>
+			</td>
+			<td class="inbox-data-message">
+				<div>
+					<span class="label bg-color-orange"><?php echo $list['l_subject'];?></span>
+				</div>
+			</td>
+			
+			<td class="inbox-data-date hidden-xs">
+				<div>
+					<span class="pull-right"><?php echo $this->privateSmartTime()->fromDateTime($list['l_date']); ?></span>
+				</div>
+			</td>
+		</tr>
+		<?php endforeach; ?><?php endif;?>
+
+	</tbody>
+</table>
+
+<script>
+	
+	//Gets tooltips activated
+	$("#inbox-table [rel=tooltip]").tooltip();
+
+	$("#inbox-table input[type='checkbox']").change(function() {
+		$(this).closest('tr').toggleClass("highlight", this.checked);
+	});
+
+	$("#inbox-table .inbox-data-message").click(function() {
+		$this = $(this);
+		getMail($this);
+	})
+	$("#inbox-table .inbox-data-from").click(function() {
+		$this = $(this);
+		getMail($this);
+	})
+	function getMail($this) {
+		//console.log($this.closest("tr").attr("id"));
+		loadURL("/messages/opened", $('#inbox-content > .table-wrap'));
+	}
+
+
+	$('.inbox-table-icon input:checkbox').click(function() {
+		enableDeleteButton();
+	})
+
+	$(".deletebutton").click(function() {
+		$('#inbox-table td input:checkbox:checked').parents("tr").rowslide();
+		//$(".inbox-checkbox-triggered").removeClass('visible');
+		//$("#compose-mail").show();
+	});
+
+	function enableDeleteButton() {
+		var isChecked = $('.inbox-table-icon input:checkbox').is(':checked');
+
+		if (isChecked) {
+			$(".inbox-checkbox-triggered").addClass('visible');
+			//$("#compose-mail").hide();
+		} else {
+			$(".inbox-checkbox-triggered").removeClass('visible');
+			//$("#compose-mail").show();
+		}
+	}
+	
+</script>

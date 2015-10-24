@@ -1,0 +1,83 @@
+<article class="col-sm-12 col-md-12 col-lg-6">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-4" data-widget-deletebutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+									<h2>Edit Form Master</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+				
+									<!-- widget content -->
+									<div class="widget-body">
+										
+				
+				<?php $form = $this->form;
+				$form->setAttribute('action', $this->url('formmaster',array('action'=> 'edit','id'=>'$this->id','controller' => 'formmaster')));
+				$form->setAttribute('class', 'smart-form');
+				$form->prepare(); ?>
+				<?php echo $this->form()->openTag($form); ?>
+				<?php $mas = $form->get('formmaster');?>
+
+									
+								
+										<fieldset><div class="row">
+												<section class="col col-sm-6">
+													<label class="select"><i></i>
+														 <?php echo $this->formElementErrors($mas->get('staff')); ?>
+														<?php echo $this->formSelect($mas->get('staff')); ?>
+													</label>
+												</section>
+												
+												<section class="col col-sm-6">
+													<label class="select"><i></i>
+														 <?php echo $this->formElementErrors($mas->get('class')); ?>
+														<?php echo $this->formSelect($mas->get('class')); ?>
+													</label>
+												</section>
+				
+
+				
+													<div class="row">
+														<div class="col col-md-12 text-right">
+															
+															<?php echo $this->formRow($form->get('submit')); ?>
+															<?php echo $this->form()->closeTag(); ?>
+														</div>
+													</div>
+												</div>
+										</fieldset>
+									
+								
+				
+									</div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+	</article>

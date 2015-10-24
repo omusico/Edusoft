@@ -1,0 +1,75 @@
+ <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="jarviswidget" id="wid-id-0">
+
+        <header>
+            <h2>Add Psychomotor Skill Rating</h2>
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    
+                                         <section class="col col-sm-1">                       
+                                            <button onclick="document.getElementById('formrate').submit();" type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Save Rating</button>
+                                        </section>
+                                      
+                                        
+                               
+                                   
+                                </div>
+                                </div>
+
+                </div> 
+
+  <form  id="formrate" class="smart-form"  action="/rating/rate" method="post">
+ <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">student</th>
+                                <th style="display:none;">Id</th>
+                                <th>Behaviour and Activities</th>
+                                <th>Rating</th>
+                            </tr>
+                        </thead><?php if($ratings):?>
+<?php foreach ($ratings as $rating) : ?>
+                        <tbody>
+                            <tr>
+                   <td style="display:none;"><input type="text" name="student" value="<?php echo $this->id;?>"></td>
+                <td style="display:none;"><input type="text" name="traits[]" value="<?php if($rating['r_id']){echo $rating['r_id'];};?>"></td>
+                
+                    <td><?php if($rating['r_name']){echo $rating['r_name'];};?></td>
+                    <td><label class="select"><i></i>
+                                         <select class="select2" id="rate" name="rate[]">
+                                            <option value="">select rating</option>
+                                            <option value="5">5</option>
+                                            <option value="4">4</option>
+                                            <option value="3">3</option>
+                                            <option value="2">2</option>
+                                            <option value="1">1</option>
+                                      
+                                                  
+                                             </select> </label>
+                            </td>
+                 
+                        </tr><?php endforeach; ?>
+                    <?php endif;?>
+                        </tbody>
+                    </table>
+</form>                                         
+
+
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
+</article>
+

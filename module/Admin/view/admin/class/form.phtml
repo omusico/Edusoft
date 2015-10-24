@@ -1,0 +1,154 @@
+<div class="col-sm-12">
+				
+									<!-- well -->
+									<div class="well well well-sm well-light">
+										<div class="row">
+                                   
+
+										</div>
+				
+													<div class="row">
+								<div class="col-sm-4">
+
+
+									<div class="form-group">
+					<form  role="form" action="/classes/form" method="post">
+                        <label>Select Secton:</label>
+                        <select class="select2" id="sec" name="sec" onchange="this.form.submit()">
+                        	   <option value="">Please select a section</option>
+                            <?php if($sessions): ?>
+                                <?php foreach($sessions as $session): ?>
+                                    <option value="<?php echo $session['id']; ?>"><?php echo $session['name']; ?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                          <noscript><input type="submit" value="Submit"/></noscript>
+						</form>                 <?php if($qb):?>
+                    </div>
+														<?php foreach ($qb as $classmaster) {?>
+
+														
+								
+										
+																<div class="well well-sm" href="">					
+											<div class="formx">
+												
+												<div class="row">
+													<div class="col-sm-3">
+														<img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo $classmaster['staff']['image'];?>" alt="staff pic" style="max-width:50px; border:2px solid;"/>
+													</div>
+													<div class="col-sm-9">	
+														
+														<section style="padding:3px 0; border:none;"><span class="">Class Name:</span><?php echo $classmaster['class']['name'];?></section>
+													
+													
+														<section style="padding:3px 0; border:none;"><span class="">Session:</span><?php echo $classmaster['year']['name'];?></section>
+												
+													
+														<section style="padding:3px 0; border:none;"><span class="">Form Master:</span><?php echo $classmaster['staff']['fname']. '  ' .$classmaster['staff']['lname'].' '.$classmaster['staff']['mname'];?></section>
+													
+														</div>
+													
+													
+													
+												</div>
+											</div>
+											</div>											
+										
+									  <?php } ?>
+									<?php endif;?>
+										</div>
+
+											<div class="col-sm-8">
+
+										<div class="table-responsive">
+										
+											<table id="stud" class="table table-bordered">
+												<thead>
+													<tr>
+														<th>Phot</th>
+														<th>Admission No</th>
+														<th>Full Name</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</div>
+											</div>
+
+
+
+						</div>
+				</div>
+		</div>	
+									
+		<script type="text/javascript">
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+	
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 * 
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 * 
+	 * TO LOAD A SCRIPT:
+	 * var pagefunction = function (){ 
+	 *  loadScript(".../plugin.js", run_after_loaded);	
+	 * }
+	 * 
+	 * OR
+	 * 
+	 * loadScript(".../plugin.js", run_after_loaded);
+	 */
+
+	// PAGE RELATED SCRIPTS
+	
+	// pagefunction
+	
+	var pagefunction = function() {
+		
+	};
+	
+	// end pagefunction
+	
+	// run pagefunction on load
+	pagefunction();
+
+</script>
+ 
+

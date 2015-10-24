@@ -1,0 +1,171 @@
+	
+
+
+
+
+
+
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-6">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+									<h2>Add Subjects</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+				
+									<!-- widget content -->
+									<div class="widget-body">
+										<div class="widget-body-toolbar">
+				
+									<?php $form = $this->form;
+				$form->setAttribute('action', $this->url('admin/default',array('action'=> 'add','controller' => 'subject')));
+				$form->prepare(); ?>
+				<?php echo $this->form()->openTag($form); ?>
+														
+				
+												<section class="col-12">
+													<label>Subject Name</label>
+													<div class="input-group">
+														<?php echo $this->formInput($form->get('subName')); ?>
+														<span class="input-group-addon"><i class="fa fa-file-text-o "></i></span>
+													</div>
+												</section>
+												
+												<section class="col-12">
+													<label>Subject Code</label>
+													<div class="input-group">
+														<?php echo $this->formInput($form->get('code')); ?>
+														<span class="input-group-addon"><i class="fa fa-file-text-o "></i></span>
+													</div>
+												</section>
+				
+												<section class="col-12">
+													<label>Subject Description</label>
+													<div class="input-group">
+														<?php echo $this->formTextarea($form->get('description')); ?>
+														<span class="input-group-addon"><i class="fa fa-file-text-o "></i></span>
+													</div>
+												</section>
+				
+													<div class="row">
+														<div class="col-md-12 text-right">
+															
+															<?php echo $this->formRow($form->get('submit')); ?>
+														</div>
+													</div>
+												
+				
+								<?php echo $this->form()->closeTag(); ?>
+							</div><!-- widget tool bar close-->
+				
+									</div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+
+	</article>
+
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-6">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+									<h2>Subjects</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+				
+									<!-- widget content -->
+									<div class="widget-body">
+										
+											<table class="table table-bordered">
+                        						<thead>
+                           						 <tr>
+					                                <th>Name</th>
+					                                <th>Code</th>
+					                                <th>Description</th>
+					                                <th>Action</th>
+					                            </tr>
+					                        </thead>
+					                        <?php foreach ($subjects as $subject) : ?>
+						                        <tbody>
+						                            <tr>
+						                    <td><?php echo $this->escapeHtml($subject->getsubName());?></td>
+						                    <td><?php echo $this->escapeHtml($subject->getCode());?></td>
+						                    <td><?php echo $this->escapeHtml($subject->getDescription());?></td>
+						                    <td>
+<a id="editterm" href="<?php echo $this->url('admin/default',array('controller' => 'subject','action'=>'edit', 'id' => $subject->getid()));?>"><button class="btn btn-xs btn-default"><i class='fa fa-pencil'></i></button></a>
+
+<a id="conf" href="<?php echo $this->url('admin/default',array('controller' => 'subject','action'=>'delete', 'id' => $subject->getid()));?>"onclick="return confirm('Do you rely want to delete this subject?')"><button class="btn btn-xs btn-default"><i class='fa fa-times'></i></button></a>
+                    						</td>                                                        
+						                        </tr><?php endforeach; ?>
+						                        </tbody>
+						                    </table>
+									</div>
+									<!-- end widget content -->
+									<div class="widget-footer">
+				<?php echo $this->paginationControl($subjects, 'Sliding', 'partial/paginator', array('route' => 'admin'));?>
+										</div>
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+
+	</article>

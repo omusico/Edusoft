@@ -1,0 +1,249 @@
+<article class="col-md-12">							
+							<!-- Widget ID (each widget will need unique ID)-->
+		
+
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-18" >
+								<!-- widget options:
+									usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+									data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="true" 
+									data-widget-sortable="false"
+									
+								-->
+								<header style="color:#fff; background:#274A80;">
+									<span class="widget-icon"><i class="glyphicon glyphicon-tasks"></i></span><h2><strong>Student Master List</strong></h2>			
+									
+								</header>
+
+								<!-- widget div-->
+								<div>
+									
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										<input class="form-control" type="text">
+										<span class="note"><i class="fa fa-check text-success"></i> Change title to update and save instantly!</span>
+										
+									</div>
+									<!-- end widget edit box -->
+									
+									<!-- widget content -->
+									<div class="widget-body">
+
+										<div class="row">
+				
+											<div class="col-md-12">
+										<div class="widget-body-toolbar">
+											
+											<div class="row">
+												
+												<div class="col-xs-9 col-sm-5 col-md-5 col-lg-5">
+													
+                    
+        												<div class="input-group">
+														<span class="input-group-addon"><i class="fa fa-search"></i></span>
+														<input class="form-control" id="searchTerm" value="" placeholder="Filter" type="text" name="searchTerm"/>
+													</div>
+												</div>
+												<div class="col-xs-3 col-sm-7 col-md-7 col-lg-7 text-right">
+													
+													<a data-toggle="modal" data-target="#edit" href="<?php echo $this->url('student',array('controller' => 'student','action'=>'add'));?>"class="btn btn-primary">
+														<i class="fa fa-plus"></i> <span class="hidden-mobile">New Student</span>
+													</a>
+
+													
+													
+												</div>
+												
+											</div>
+											
+												
+
+										</div>
+										
+										<div class="custom-scroll table-responsive">
+											
+
+											<table id="studenttable" data-show-export="true" data-pagination="true" data-click-to-select="true"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered table-hover">
+													<thead> 
+							<tr>
+								<th>Photo</th>
+								<th data-sortable="true">Reg. No</th>
+								<th data-sortable="true">First Name</th>
+								<th>Last Name</th>
+								<th>Middle Name</th>
+								<th data-sortable="true">Gender</th>
+								<th data-sortable="true">Status</th>
+								<th data-sortable="true">Class</th>
+								<th data-sortable="true">Section</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody><?php if($students):?>
+					<?php foreach ($students as $student) : ?>
+						<tr>
+							<td style="width:5%;"><img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo $student['s_image'];?>" alt="student pic" style="max-width:30px; border:2px solid #FFF;"></td>
+							<td><?php echo $this->escapeHtml($student['s_admNo']);?></td>
+							<td><?php echo $this->escapeHtml($student['p_fname']);?></td>
+							<td><?php echo $this->escapeHtml($student['p_lname']);?></td>
+							<td><?php echo $this->escapeHtml($student['p_mname']);?></td>
+							<td><?php echo $this->escapeHtml($student['p_sex']);?></td>
+							<td><?php echo $this->escapeHtml($student['s_status']);?></td>
+							<td><?php echo $this->escapeHtml($student['c_name']);?></td>
+							<td><?php echo $this->escapeHtml($student['d_name']);?></td>
+						    <td>
+	 <a  data-toggle="modal" data-target="#edit" href="<?php echo $this->url('student',array('controller' => 'student','action'=>'viewfull', 'id' => $student['s_id']));?>"><button type="button" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-eye-open"></i></button></a>
+
+
+ <a  data-toggle="modal" data-target="#edit" href="<?php echo $this->url('student',array('controller' => 'student','action'=>'edit', 'id' => $student['s_id']));?>"><button type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil-square-o"></i></button></a>  
+
+ 
+					 
+
+<a id="conf" href="<?php echo $this->url('student',array('controller' => 'student','action'=>'delete', 'id' => $student['s_id']));?>"onclick="return confirm('Do you rely want to delete this salary defination?')"><button type="button" class="btn btn-xs btn-danger">
+  <i class="glyphicon glyphicon-trash"></i></button></a>
+							</td>
+						</tr>
+							
+						<?php endforeach; ?>
+						<?php endif;?>								
+												</tbody>
+											</table>
+										</div>
+										
+										
+									
+									</div>
+									
+	
+									</div>
+
+									
+									
+								</div>
+								<!-- end widget div -->
+								
+							</div>
+							<!-- end widget -->
+
+						</article>
+<div class="modal fade" id="itemsx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:900px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+<div class="modal fade" id="items" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:400px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+						<!-- MODAL FOR EDITING ACADEMIC SESSION -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:900px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+
+<script type="text/javascript">
+    
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+        // clears the variable if left blank
+        $('#studenttable').bootstrapTable({
+
+            });
+    };
+     loadScript("/bot/bootstrap-table.js");
+    
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+    
+  		
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+    
+</script>

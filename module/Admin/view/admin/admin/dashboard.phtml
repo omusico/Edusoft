@@ -1,0 +1,166 @@
+
+        <!-- NEW WIDGET START -->
+        <article class="col col-sm-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+                    <h2>Dashboard</h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+
+                    <!-- widget content -->
+                    <div class="widget-body">
+                        
+                        <div class="row">
+                            <div class="col col-sm-3 bg-color-greenLight" style="border:solid #C02631;  margin:5px 5px 5px 5px;">
+                                    <div class="row">
+                                        <div class="col col-sm-4 text-center txt-color-white">
+                                           <span class="font-xl">
+                                            <i class="fa fa-xl fa-fw fa-group" ></i>
+                                            </span>
+                                        </div>
+                                        <div class="col col-sm-8 bg-color-white">
+                                            <p class="text-center"><strong>Total Students</strong>
+                                            <strong><h2 class="text-center">
+                                            <?php echo $studenttotal;?>
+                                              </h1></strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                            </div>  
+
+                                              
+                             <div class="col col-sm-3 bg-color-teal" style="border:solid #568A89; margin:5px 5px 5px 5px;">
+                                    <div class="row">
+                                        <div class="col col-sm-4 text-center txt-color-white">
+                                           <span class="font-xl">
+                                            <i class="fa fa-xl fa-fw fa-male" ></i>
+                                            </span>
+                                        </div>
+                                        <div class="col col-sm-8 bg-color-white">
+                                            <p class="text-center"><strong>Male Students</strong>
+                                            <?php if($studentmale):?><strong><h2 class="text-center">
+                                            <?php foreach ($studentmale as $total):?>
+                                               <?php echo $total['total'];?></h1></strong>
+                                            <?php endforeach;?>
+                                            <?php endif;?>
+                                            </p>
+                                        </div>
+                                    </div>
+                            </div>    
+
+                            <div class="col col-sm-4 bg-color-red" style="border:solid #C02631; margin:7px 7px 7px 7px;">
+                                    <div class="row">
+                                        <div class="col col-sm-4 text-center txt-color-white">
+                                           <span class="font-xl">
+                                            <i class="fa fa-xl fa-fw fa-female" ></i>
+                                            </span>
+                                        </div>
+                                        <div class="col col-sm-8 bg-color-white">
+                                            <p class="text-center"><strong>Female Students</strong>
+                                            <?php if($studentfemale):?><strong><h2 class="text-center">
+                                            <?php foreach ($studentfemale as $total):?>
+                                               <?php echo $total['total'];?></h1></strong>
+                                            <?php endforeach;?>
+                                            <?php endif;?>
+                                            </p>
+                                        </div>
+                                    </div>
+                            </div>
+                    </div>
+
+
+                     <div class="row">
+                            <div class="col col-sm-3 bg-color-magenta" style="border:solid #6E3671;  margin:5px 5px 5px 5px;">
+                                    <div class="row">
+                                        <div class="col col-sm-4 text-center txt-color-white">
+                                           <span class="font-xl">
+                                            <i class="fa fa-xl fa-fw fa-user" ></i>
+                                            </span>
+                                        </div>
+                                        <div class="col col-sm-8 bg-color-white">
+                                            <p class="text-center"><strong>Total Staffs</strong>
+                                            <strong><h2 class="text-center">
+                                            <?php echo $staff;?>
+                                              </h1></strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                            </div>  
+
+                                              
+                             <div class="col col-sm-3 bg-color-blueDark" style="border:solid #4C4F53; margin:5px 5px 5px 5px;">
+                                    <div class="row">
+                                        <div class="col col-sm-4 text-center txt-color-white">
+                                           <span class="font-xl">
+                                            <i class="fa fa-xl fa-fw fa-group" ></i>
+                                            </span>
+                                        </div>
+                                       <div class="col col-sm-8 bg-color-white">
+                                            <p class="text-center"><strong>Total Parents</strong>
+                                            <strong><h2 class="text-center">
+                                            <?php echo $totalparents;?>
+                                              </h1></strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                            </div>    
+
+                            <div class="col col-sm-4 bg-color-greenDark" style="border:solid #496949; margin:7px 7px 7px 7px;">
+                                    <div class="row">
+                                        <div class="col col-sm-4 text-center txt-color-white">
+                                           <span class="font-xl">
+                                            <i class="fa fa-xl fa-fw fa-sitemap" ></i>
+                                            </span>
+                                        </div>
+                                        <div class="col col-sm-8 bg-color-white">
+                                            <p class="text-center"><strong>Total Classes</strong>
+                                            <strong><h2 class="text-center">
+                                            <?php echo $totalclass;?>
+                                              </h1></strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                            </div>
+                    </div>
+    
+    
+                                                        
+                    
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+            
+
+        </article>
+        <!-- WIDGET END -->

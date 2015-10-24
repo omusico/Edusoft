@@ -1,0 +1,145 @@
+<?php foreach ($lists as $list):?>
+    <div id="msg" class="hidden-md hidden-lg hidden-xs hidden-sm"><?php echo $list['m_id'];?>
+            </div>
+<h2 class="email-open-header">
+    Re: <?php echo $list['m_subject'];?> <span class="label txt-color-white">inbox</span>
+    <a href="javascript:void(0);" rel="tooltip" data-placement="left" data-original-title="Print" class="txt-color-darken pull-right"><i class="fa fa-print"></i></a>   
+</h2>
+
+<div class="inbox-info-bar">
+    <div class="row">
+        <div class="col-sm-9">
+            <img src="img/avatars/5.png" alt="me" class="away">
+            <strong><?php echo $list['u_displayName'];?></strong>
+            <span class="hidden-mobile">&lt;<?php echo $list['u_email'];?>&gt;to <strong>me</strong> on <i><?php echo $list['m_date']->format('d/m/Y');?></i></span> 
+        </div>
+        <div class="col-sm-3 text-right">
+            
+            <div class="btn-group text-left">
+                <button class="btn btn-primary btn-sm replythis">
+                    <i class="fa fa-reply"></i> Reply
+                </button>
+                <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="javascript:void(0);" class="replythis"><i class="fa fa-reply"></i> Reply</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="replythis"><i class="fa fa-mail-forward"></i> Forward</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);"><i class="fa fa-print"></i> Print</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="javascript:void(0);"><i class="fa fa-ban"></i> Mark as spam!</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="deletethis"><i class="fa fa-trash-o"></i> Delete forever</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="inbox-message">
+ <?php echo $list['m_message'];?>
+</div>
+
+<?php endforeach ;?>
+
+
+
+</div>
+
+<script type="text/javascript">
+    
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR
+     * 
+     * loadScript(".../plugin.js", run_after_loaded);
+     */
+    
+    
+    // PAGE RELATED SCRIPTS
+    
+    $(".table-wrap [rel=tooltip]").tooltip();
+
+    $(".replythis").click(function(){
+        loadURL("ajax/email-reply.html", $('#inbox-content > .table-wrap'));
+    })
+
+      $(".deletethis").click(function(){
+        loadURL("/messages/delete", $('#inbox-content > .table-wrap'));
+    })
+
+         $(".deletethis").click(function(){
+    var state = $('#msg').text();
+
+     $.ajax({   //create an ajax request to load_page.php
+        type: "POST",
+        url: "/messages/delete",
+        data: {state: state},   //with the page number as a parameter
+        dataType: "html",   //expect html to be returned
+        success: function(msg){
+
+            if(parseInt(msg)!=0)    //if no errors
+            {
+                $('#inbox-content > .table-wrap').html(msg);    //load the returned html into pageContet
+                //$('#loading').css('visibility','hidden'); //and hide the rotating gif
+            }
+        }
+        });
+
+    });
+    
+</script>

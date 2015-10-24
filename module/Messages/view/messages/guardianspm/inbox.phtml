@@ -1,0 +1,191 @@
+<div id="inbox-content" class="inbox-body">
+
+	<div class="inbox-side-bar">
+
+<div class="btn-block btn-group">
+							<button class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown">
+								Compose <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="javascript:void(0);" id="students-mail">To All Students</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);" id="parents-mail">To All Parents</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);" id="staffs-mail">To All Staffs</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="javascript:void(0);" id="compose-mail">Custom</a>
+								</li>
+							</ul>
+						</div>
+
+		<ul class="inbox-menu-lg">
+			<li class="active">
+				<a class="inbox-load" href="javascript:void(0);"> Inbox (<?php if($total){echo $total;}else{echo 0;};?>) </a>
+			</li>
+			<li>
+				<a href="javascript:void(0);">Sent (<?php if($sent){echo $sent;}else{echo 0;};?>)</a>
+			</li>
+			<li>
+				<a href="javascript:void(0);">Draft</a>
+			</li>
+			<li>
+				<a href="javascript:void(0);">Trash</a>
+			</li>
+		</ul>
+
+	</div>
+
+	<div class="table-wrap custom-scroll animated fast fadeInRight">
+		<!-- ajax will fill this area -->
+		LOADING...
+
+	</div>
+
+
+</div>
+
+<script type="text/javascript">
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+
+	// PAGE RELATED SCRIPTS
+
+	// pagefunction
+	
+	var pagefunction = function() {
+
+		// fix table height
+		tableHeightSize();
+
+		$(window).resize(function() {
+			tableHeightSize()
+		})
+		function tableHeightSize() {
+
+			if ($('body').hasClass('menu-on-top')) {
+				var menuHeight = 68;
+				// nav height
+
+				var tableHeight = ($(window).height() - 224) - menuHeight;
+				if (tableHeight < (320 - menuHeight)) {
+					$('.table-wrap').css('height', (320 - menuHeight) + 'px');
+				} else {
+					$('.table-wrap').css('height', tableHeight + 'px');
+				}
+
+			} else {
+				var tableHeight = $(window).height() - 224;
+				if (tableHeight < 320) {
+					$('.table-wrap').css('height', 320 + 'px');
+				} else {
+					$('.table-wrap').css('height', tableHeight + 'px');
+				}
+
+			}
+
+		}
+
+		/*
+		 * LOAD INBOX MESSAGES
+		 */
+		loadInbox();
+		function loadInbox() {
+			loadURL("/messages/list", $('#inbox-content > .table-wrap'))
+		}
+	
+		/*
+		 * Buttons (compose mail and inbox load)
+		 */
+		$(".inbox-load").click(function() {
+			loadInbox();
+		});
+	
+		// compose email
+		$("#compose-mail").click(function() {
+			loadURL("/messages/compose", $('#inbox-content > .table-wrap'));
+		});
+
+		// compose email
+		$("#students-mail").click(function() {
+			loadURL("/messages/students", $('#inbox-content > .table-wrap'));
+		});
+
+		// compose email
+		$("#parents-mail").click(function() {
+			loadURL("/messages/parents", $('#inbox-content > .table-wrap'));
+		});
+
+		// compose email
+		$("#staffs-mail").click(function() {
+			loadURL("/messages/staffs", $('#inbox-content > .table-wrap'));
+		});
+		
+	};
+	
+	// end pagefunction
+
+	// destroy generated instances 
+	// pagedestroy is called automatically before loading a new page
+	// only usable in AJAX version!
+
+	/*var pagedestroy = function(){
+		
+		// destroy summernote
+		if (".summernote") {
+			$(".summernote").summernote( 'destroy' );
+		}
+		
+		// clear misc. click events
+		//$(".inbox-load").off();
+
+		//loadInbox = undefined;
+		//tableHeightSize = undefined;
+
+		// debug msg
+		if (debugState){
+			root.console.log("✔ Summernote editor destroyed");
+		} 
+
+	}*/
+
+	// end destroy
+	
+	// load delete row plugin and run pagefunction
+
+	loadScript("js/plugin/delete-table-row/delete-table-row.min.js", pagefunction);
+	
+</script>

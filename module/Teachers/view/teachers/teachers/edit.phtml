@@ -1,0 +1,294 @@
+<article class="col-sm-12 col-md-12 col-lg-12">
+			
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" style="margin-left:10%; margin-right:10%">
+				<!-- widget options:
+					usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+					
+					data-widget-colorbutton="false"	
+					data-widget-editbutton="false"
+					data-widget-togglebutton="false"
+					data-widget-deletebutton="false"
+					data-widget-fullscreenbutton="false"
+					data-widget-custombutton="false"
+					data-widget-collapsed="true" 
+					data-widget-sortable="false"
+					
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-graduation-cap"></i> </span>
+					<h2>Edit Profile </h2>				
+					
+				</header>
+
+				<!-- widget div-->
+				<div>
+					
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+						
+					</div>
+					<!-- end widget edit box -->
+					
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+						<?php $form = $this->form;
+			 $form->setAttribute('action', $this->url('teachers',array('action'=> 'edit','controller' => 'teachers', 'id'=>$this->id)));
+			// $form->setAttribute('class', 'form-horizontal');
+			// $form->setAttribute('readonly', 'true');
+									
+			//	$form->setAttribute('style', 'pointer-events: none');
+            //$form->setAttribute('class', 'form-inline');
+
+			$form->prepare(); ?>
+			<?php echo $this->form()->openTag($form); ?>
+			<?php $staff = $form->get('staff');?>
+			
+						
+							<header>Basic Information</header>
+
+							<fieldset>
+								<div class="row">
+									<section class="col col-4">
+										<img id="imageupload" src="<?php echo $this->basePath?>/data/uploads/staffs/<?php if($this->image) { echo $this->image;}else{echo 'avatar.png';};?>" style="width:140px; height:140px;" alt="me" />
+											<div class="input input-file">
+										<?php echo $this->formFile($staff->get('image')); ?>
+										</div>
+										</section>
+
+										<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($staff->get('fname')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('fname')); ?>
+									</section>
+
+									
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($staff->get('lname')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('lname')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($staff->get('mname')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('mname')); ?>
+									</section>
+
+										
+
+
+								
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-phone"></i>
+											<?php echo $this->formInput($staff->get('mobile1')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('mobile1')); ?>
+									</section>
+										
+
+									
+
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-phone"></i>
+											<?php echo $this->formInput($staff->get('mobile2')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('mobile2')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-email"></i>
+											<?php echo $this->formInput($staff->get('email')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('email')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-facebook"></i>
+											<?php echo $this->formInput($staff->get('facebook')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('facebook')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-twitter"></i>
+											<?php echo $this->formInput($staff->get('twitter')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('twitter')); ?>
+									</section>
+
+									<section class="col col-4">
+											<label class="textarea"> <i class="icon-append fa fa-comment"></i>
+											<?php echo $this->formTextarea($staff->get('raddress')); ?></label>
+											 <?php echo $this->formElementErrors($staff->get('raddress')); ?>
+										</section>
+
+										<section class="col col-4">
+											<label class="textarea"> <i class="icon-append fa fa-comment"></i>
+											<?php echo $this->formTextarea($staff->get('paddress')); ?></label>
+											 <?php echo $this->formElementErrors($staff->get('paddress')); ?>
+										</section>
+								</div>
+							</fieldset>
+
+							<fieldset>
+								<div class="row">
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($staff->get('country')); ?></label>
+											 <?php echo $this->formElementErrors($staff->get('country')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($staff->get('state')); ?></label>
+											 <?php echo $this->formElementErrors($staff->get('state')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($staff->get('lga')); ?></label>
+											 <?php echo $this->formElementErrors($staff->get('lga')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($staff->get('sex')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('sex')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-calendar"></i>
+											<?php echo $this->formInput($staff->get('dob')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('dob')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($staff->get('religion')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('religion')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($staff->get('nokName')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('nokName')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-chain"></i>
+											<?php echo $this->formInput($staff->get('nokRel')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('nokRel')); ?>
+									</section>
+
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-mobile"></i>
+											<?php echo $this->formInput($staff->get('nokMobile')->setAttribute('data-mask','+99 (999) 999-9999')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($staff->get('nokMobile')); ?>
+									</section>
+
+								</div>
+								
+							</fieldset>
+
+							<footer>
+								<?php echo $this->formRow($form->get('submit')); ?>
+								
+							</footer>
+						
+							<?php echo $this->form()->closeTag(); ?>
+					</div>
+					<!-- end widget content -->
+					
+				</div>
+				<!-- end widget div -->
+				
+			</div>
+			<!-- end widget -->
+
+
+				
+</article>
+
+  <script type="text/javascript">
+   
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR
+     * 
+     * loadScript(".../plugin.js", run_after_loaded);
+     */
+
+    // PAGE RELATED SCRIPTS
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+        
+    };
+    
+    // end pagefunction
+    
+    // run pagefunction on load
+    pagefunction();
+
+</script>
+
+
+
+

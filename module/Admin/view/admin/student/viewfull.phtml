@@ -1,0 +1,292 @@
+
+<?php $person=$student->getStudent()->getPerson();
+	  $fullname=$person->getFname(). '  ' .$person->getLname().' '.$person->getMname();
+	  $sex=$person->getSex();
+	  $mobile=$person->getMobile();
+	  $religion=$person->getReligion();
+	  $dob=$person->getDob();
+	  $country=$person->getCountry()->getName();
+	  $state=$person->getState()->getName();
+	  $lga=$person->getLga()->getName();
+	  
+	  $nokname=$person->getNokName();
+	  $nokrel=$person->getNokRel();
+	  $nokmobile=$person->getNokMobile();
+
+
+	 $student=$student->getStudent();
+	 $id=$student->getId();
+	  $admno=$student->getAdmNo();
+	  $profile=$student->getImage();
+	  $class=$student->getCurrentClass()->getName();
+
+	   $parent=$person->getGuardian();
+	   $pfullname=$parent->getFname(). '  ' .$parent->getLname().' '.$parent->getMname();
+	   $pmobile1=$parent->getMobile1();
+	   $pmobile2=$parent->getMobile2();
+	   $occupation=$parent->getOccupation();
+	   $pemail=$parent->getEmail();
+
+	   $admdate=$student->getAdmDate();
+	   $classadmn=$student->getClass()->getName();
+	   $yearadmn=$student->getYear()->getName();
+	   $termadmn=$student->getTerm()->getName();
+	   $sectionsadmn=$student->getSection()->getName();
+
+
+
+
+?>
+
+
+<div class="row">
+<div id="printdiv" class="col-sm-12">
+
+
+<div class="well well well-sm well-light">
+
+            	<div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center font-xl"><strong>BRAINFIELD INTERNATIONAL SCHOOL</strong></p>
+                         <p class="text-center font-xs"><strong>Address:</strong>Along Massallachi Idi Road, Onarikpa, Angwan Waje Shabu, Lafia Nasarawa State.</p>
+                          <p class="text-center font-xs"><strong>Tel:</strong>08024939205, 08039151466.</p>
+                          <p class="text-center font-xl"><strong>STUDENT PROFILE</strong></p>
+                        </div>
+                </div>
+
+                <hr></hr>
+
+                 <div class="row" style="margin-bottom:5px; padding:5px; ">
+                                   
+                         <div class="col col-sm-2">
+                            <img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo $profile;?>" alt="student pic" style="max-width:90px; border:5px solid #fff;"/>
+                         </div>
+                         <div class="col col-sm-10">
+                            <table class="ptable">
+                                <tbody>
+                                    <tr>																	
+
+                                <td style="background"> <strong>Admission No:</strong></td>
+                                <td><?php echo $admno;?></td> 
+                                <td>Year Admitted:</td>
+                                <td><?php echo $yearadmn.'-'.$termadmn;?></td>                    
+                                    </tr>
+
+                                    <tr>
+                                <td>Current Class:</td>
+                                <td><?php echo $class;?></td>
+                                <td>Class Admitted:</td>
+                                <td><?php echo $classadmn;?></td>  
+                                    </tr>
+
+                                    <tr>
+                                <td>Section Admitted:</td>
+                                <td><?php echo $sectionsadmn;?></td>
+                                <td>Admission Date:</td>
+                                <td><?php echo $admdate;?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                         </div>
+            	 </div>
+
+        
+		        <div class="row">
+		            <div class="col col-sm-12">
+		                      <table class="table table-bordered">
+		                      	<thead>
+		                      		<th colspan="4" style="background:#1B1E24; color:#fff; ">PERSONAL INFORMATION</th>
+		                      	</thead>
+		                       <tbody>
+									<tr>
+										<td ><strong>Name:</strong></td>
+										<td ><?php echo $fullname;?></td>
+										<td><strong>Country:</strong> </td>
+										<td><?php echo $country;?></td>
+									</tr>
+									<tr>
+										<td ><strong>Sex:</strong></td>
+										<td><?php echo $sex;?></td>
+										<td><strong>State:</strong></td>
+										<td><?php echo $state;?></td>
+									</tr>
+									<tr>
+										<td><strong>Date of Birth:</strong> </td>
+										<td><?php echo $dob;?></td>
+										<td><strong>L.G.A:</strong></td>
+										<td><?php echo $lga;?></td>
+									</tr>
+									<tr>
+										<td><strong>Religion:</strong></td>
+										<td><?php echo $religion;?></td>
+									</tr>				
+								</tbody>
+		                    </table>
+		            </div>      
+		        </div>
+
+	        <div class="row">
+			     <div class="col col-sm-12">
+        			<table class="table table-bordered">
+        				<thead>
+		                      <th colspan="4" style="background:#1B1E24; color:#fff; ">PARENT INFORMATION</th>
+		                 </thead>
+						<tbody>
+							<tr>
+								<td><span class="text-muted">Name:</span></td>
+								<td><?php echo $pfullname;?></td>
+								<td><span class="text-muted">Mobile No. 1:</span> </td>
+								<td><?php echo $pmobile1;?></td>
+							</tr>
+							<tr>
+								<td><span class="text-muted">Occupation:</span></td>
+								<td><?php echo $occupation;?></td>
+								<td><span class="text-muted">Mobile No. 2:</span></td>
+								<td><?php echo $pmobile2;?></td>
+							</tr>
+							<tr>
+								<td><span class="text-muted">Email:</span></td>
+								<td><?php echo $pemail;?></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		
+	        <div class="row">
+			     <div class="col col-sm-12">
+        			<table class="table table-bordered">
+        				<thead>
+		                    <th colspan="4" style="background:#1B1E24; color:#fff;">NEXT OF KIN INFORMATION</th>
+		                 </thead>
+						<tbody>
+							<tr>
+								<td><span class="text-muted">Name:</span></td>
+								<td><?php echo $nokname;?></td>
+								<td><span class="text-muted">Mobile:</span></td>
+								<td><?php echo $nokmobile;?></td>
+							</tr>
+							<tr>
+								<td><span class="text-muted">Relationship:</span> </td>
+								<td><?php echo $nokrel;?></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+
+
+        <div class="row">
+           <div class="col col-sm-4">
+            <button id="print" class="btn btn-success"><i class="fa fa-print"></i> PRINT</button>
+           </div>
+        </div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+    
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+       $("#print").click(function() {
+// Print the DIV.
+  $("#printdiv").print({
+            globalStyles: true,
+            mediaPrint: false,
+            stylesheet: null,
+            noPrintSelector: ".no-print",
+            iframe: false,
+            append: null,
+            prepend: null,
+            manuallyCopyFormValues: true,
+            deferred: $.Deferred(),
+            timeout: 250
+    });
+//return (false);
+});
+    };
+
+        loadScript("/js/jquery.print.js");
+   
+    
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+  
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+    
+</script>

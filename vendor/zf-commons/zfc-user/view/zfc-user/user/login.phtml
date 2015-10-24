@@ -1,0 +1,136 @@
+
+     <?php
+                                $form = $this->loginForm;
+                                $form->prepare();
+                                $form->setAttribute('action', $this->url('zfcuser/login'));
+                                $form->setAttribute('method', 'post');
+                                $form->setAttribute('class', 'lockscreen animated flipInY');
+                                $form->setAttribute('id', 'login-form');
+                            ?>
+                            <?php echo $this->form()->openTag($form) ?>
+<fieldset>
+                <div class="logo">
+                    <h1 class="semi-bold"><img src="<?php echo $this->basePath('../img/edlogo.png') ?>"/>  <strong>Edusoft</strong> School Management System</h1>
+                </div>
+                <div>
+                    <img class="hidden-mobile" src="<?php echo $this->basePath('../img/brn.png') ?>" alt="" width="120" height="120" />
+                    <div>
+                        <h1><i class="fa fa-lock"></i></i>Login</h1>                       
+                        <?php echo $this->formElementErrors($form->get('identity')) ?>                                
+                                 <div class="form-group">
+                                    <div class="input-group">
+                                    <?php echo $this->formInput($form->get('identity')) ?>
+                                        <span class="input-group-addon">
+                                            <i class="icon-append fa fa-user"></i>
+                                        </span>
+                                     </div>
+                                </div>
+
+                                 <div class="form-group">
+                                    <div class="input-group">
+                                  <?php echo $this->formInput($form->get('credential')) ?>
+                                    <span class="input-group-addon">
+                                        <i class="icon-append fa fa-lock"></i>
+                                    </span>
+                                  </div>
+                                </div> 
+
+                                <footer>
+                                    <?php if ($this->redirect): ?>
+                                            <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
+                                        <?php endif ?>
+                                        <?php echo $this->formButton($form->get('submit')) ?>
+                               
+                        <span class="text-right">
+                             <?php if ($this->enableRegistration) : ?>
+                                    <?php echo $this->translate('Want to apply?'); ?> <a href="#"><?php echo $this->translate('Sign up!'); ?></a>
+                                    <?php endif; ?>
+                        </span>
+                         </footer>
+                    </div>
+
+                </div>
+                <p class="font-xs margin-top-5">
+                    Copyright Edusoft 2014-2020.
+
+                </p>
+           
+</fieldset>
+     <?php echo $this->form()->closeTag();?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+            runAllForms();
+
+            $(function() {
+                // Validation
+                $("#login-form").validate({
+                    // Rules for form validation
+                    rules : {
+                        identity : {
+                            required : true,
+                            //email : true
+                        },
+                        credential : {
+                            required : true,
+                            minlength : 3,
+                            maxlength : 20
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        identity : {
+                            required : 'Please enter your email address',
+                           // email : 'Please enter a VALID email address'
+                        },
+                        credential : {
+                            required : 'Please enter your password'
+                        }
+                    },
+
+                    // Do not change code below
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+            });
+        </script>

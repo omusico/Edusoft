@@ -1,0 +1,355 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en" >
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Edusoft '. $this->translate('Cloud Base School Management System'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0') 
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/font-awesome.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/erp-production-plugins.min.css')
+                         ->prependStylesheet($this->basePath() . '/css/slimbox2.css')
+                        ->prependStylesheet($this->basePath() . '/js/plugin/fancybox/jquery.fancybox.css')
+                        ->prependStylesheet($this->basePath() . '/css/erp-production.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/erp-skins.min.css') 
+                        ->prependStylesheet($this->basePath() . '/css/erp-rtl.min.css') 
+                        ->prependStylesheet($this->basePath() . '/css/demo.min.css')?>
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+    </head>
+
+
+<body class="smart-style-1 container">
+
+     
+
+      <!-- MAIN CONTENT -->
+      <div id="content">
+
+      
+<?php $staffno=$staff->getStaffno();
+	  $fullname=$staff->getFname(). '  ' .$staff->getLname().' '.$staff->getMname();
+	  $sex=$staff->getSex();
+	  $mobile1=$staff->getMobile1();
+	  $mobile2=$staff->getMobile2();
+	  $religion=$staff->getReligion();
+	  $dob=$staff->getDob();
+	  $country=$staff->getCountry()->getName();
+	  $state=$staff->getState()->getName();
+	  $lga=$staff->getLga()->getName();
+
+	  $paddress=$staff->getPaddress();
+	  $raddress=$staff->getRaddress();
+	  $facebook=$staff->getFacebook();
+	  $twitter=$staff->getTwitter();
+	  $email=$staff->getEmail();
+	  $facebook=$staff->getFacebook();
+
+	  $levelstarted=$staff->getLevel()->getName();
+	  $clevel=$staff->getClevel()->getName();
+	  $employdate=$staff->getEmploydate();
+	  $staffcat=$staff->getStaffType()->getName();
+	  $qualification=$staff->getQualification();
+	  $image=$staff->getImage();
+	  $nokname=$staff->getNokName();
+	  $nokrel=$staff->getNokRel();
+	  $nokmobile=$staff->getNokMobile();
+
+
+
+
+
+?>
+<div class="row">
+				
+					<div class="col-sm-12">
+				
+				
+							<div class="well well-sm">
+				
+								<div class="row">
+				
+									<div class="col-sm-12 col-md-12 col-lg-11">
+										<div class="well well-light well-sm no-margin no-padding">
+				
+											<div class="row">
+				
+												<div class="col-sm-12">
+													<div id="myCarousel" class="carousel fade profile-carousel">
+														<div class="air air-bottom-right padding-10">
+															<a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i> Follow</a>&nbsp; <a href="<?php echo $this->url('staff',array('controller' => 'staff','action'=>'generatepdf', 'id' => $staff->getid()));?>" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i> Print</a>
+
+
+														</div>
+														<div class="air air-top-left padding-10">
+															<h4 class="txt-color-white font-md"><?php echo Date('d/m/Y');?></h4>
+														</div>
+														<ol class="carousel-indicators">
+															<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+															<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+															<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+														</ol>
+														<div class="carousel-inner">
+															<!-- Slide 1 -->
+															<div class="item active">
+																<img src="<?php echo $this->basePath('/img/demo/s1.jpg') ?>" alt="demo user">
+															</div>
+															<!-- Slide 2 -->
+															<div class="item">
+																<img src="<?php echo $this->basePath('/img/demo/s2.jpg')?>" alt="demo user">
+															</div>
+															<!-- Slide 3 -->
+															<div class="item">
+																<img src="<?php echo $this->basePath('/img/demo/s3.jpg')?>" alt="demo user">
+															</div>
+														</div>
+													</div>
+												</div>
+				
+												<div class="col-sm-12">
+				
+													<div class="row">
+				
+														<div class="col-sm-3 profile-pic">
+															<img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo $image;?>" alt="staff pic">
+															<div class="padding-10">
+																<div class="font-sm">Staff NO.
+																</div>
+																<div><span class="text-muted"><?php echo $staffno;?></span>
+																</div>
+																<div class="font-sm">Current Level.
+																</div>
+																<div><span class="text-muted"><?php echo $clevel;?></span>
+																</div>
+																
+
+															</div>
+														</div>
+											
+														<div class="col-sm-5">
+															<h3>Staff Info</h3>
+																	
+											<table class="table table-hover">
+												
+												<tbody>
+													<tr >
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Name:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $fullname;?></td>
+													</tr>
+													<tr >
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Sex:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $sex;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Date of Birth:</span> </td>
+														<td style="padding:3px 0; border:none;"><?php echo $dob;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Religion:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $religion;?></td>
+													</tr>
+													<tr >
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Mobile 1:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $mobile1;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Mobile 2:</span> </td>
+														<td style="padding:3px 0; border:none;"><?php echo $mobile2;?></td>
+													</tr>
+													<tr >
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Email:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $email;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Facebook:</span> </td>
+														<td style="padding:3px 0; border:none;"><?php echo $facebook;?></td>
+													</tr>
+													<tr >
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Twitter:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $twitter;?></td>
+													</tr>
+													
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Country:</span> </td>
+														<td style="padding:3px 0; border:none;"><?php echo $country;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">State:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $state;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">L.G.A:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $lga;?></td>
+													</tr>
+												</tbody>
+											</table>
+																										
+							
+														</div>
+														<div class="col-sm-3">
+																<h3>Next of Kin Info</h3>
+															<table class="table table-hover">
+												
+																<tbody>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Name:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $nokname;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Mobile:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $nokmobile;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Relationship:</span> </td>
+																		<td style="padding:3px 0; border:none;"><?php echo $nokrel;?></td>
+																	</tr>
+																	</tbody>
+															</table>
+
+
+																<h3>School Info</h3>
+															<table class="table table-hover">
+												
+																<tbody>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Appointment Date:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $employdate;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Level Started:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $levelstarted;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Qualification:</span> </td>
+																		<td style="padding:3px 0; border:none;"><?php echo $qualification;?></td>
+																	</tr>
+
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Staff Category:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $staffcat;?></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+												</div>
+												
+				
+													</div>
+				
+												</div>
+				
+											</div>
+				
+											
+											<!-- end row -->
+				
+										</div>
+				
+									</div>
+									
+				
+									</div>
+								</div>
+				
+							</div>
+				
+				
+					</div>
+				
+				</div>
+
+
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <!-- PAGE FOOTER -->
+    <div class="page-footer">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <span class="txt-color-white">Edusoft 1.5 <span class="hidden-xs"> - School Management System</span> © 2014-2015</span>
+        </div>
+      </div>
+    </div>
+    <!-- END PAGE FOOTER -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+    -->
+    
+    </div>
+    <!-- END SHORTCUT AREA -->
+
+    <!--================================================== -->
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+  
+
+     <?php echo $this->headScript()  
+             ->prependFile($this->basePath() . '/js/editterm.js')
+           
+            ->prependFile($this->basePath() . '/js/smartwidgets/jarvis.widget.min.js')
+            ->prependFile($this->basePath() . 'js/notification/SmartNotification.min.js')
+            ->prependFile($this->basePath() . 'js/plugin/jquery-validate/jquery.validate.min.js')
+            ->prependFile($this->basePath() . '/js/plugin/pace/pace.min.js')
+            ->prependFile($this->basePath() . '/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js')
+            ->prependFile($this->basePath() . '/js/smartwidgets/jarvis.widget.min.js')
+            ->prependFile($this->basePath() . '/js/plugin/select2/select2.min.js')
+            ->prependFile($this->basePath() . '/js/demo.min.js')
+            ->prependFile($this->basePath() . '/js/app.min.js')
+            ->prependFile($this->basePath() . '/js/app.config.js')
+            ->prependFile($this->basePath() . '/js/bootstrap/bootstrap.min.js')
+            //->prependFile($this->basePath() . 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+           // ->prependFile($this->basePath() . 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+             ->prependFile($this->basePath() . '/js/imagelightbox.js')
+              ->prependFile($this->basePath() . '/js/slimbox2.js')
+                ->prependFile($this->basePath() . '/js/plugin/fancybox/jquery.fancybox.js')
+                 ->prependFile($this->basePath() . '/js/plugin/fancybox/jquery.fancybox.min.js')
+            ->prependFile($this->basePath() . '/js/jquery-ui-1.10.3.min.js')
+            ->prependFile($this->basePath() . '/js/jquery-2.1.1.min.js')
+        ; ?>
+
+
+          <?php echo $this->inlineScript() ?>
+    <!-- Demo purpose only -->
+   
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script>
+  $(document).ready(function() {
+      
+      pageSetUp();
+
+
+$(".fancybox").fancybox({
+maxWidth    : 800,
+maxHeight    : 600,
+fitToView    : true,
+width        : '70%',
+height        : '70%',
+autoSize    : true,
+closeClick    : false,
+
+});
+
+});
+    
+  
+    </script>
+
+   
+  </body>
+
+</html>

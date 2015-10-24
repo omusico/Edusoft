@@ -1,0 +1,186 @@
+<article class="col-xs-12 col-sm-6 col-md-10 col-lg-12">
+<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-19" data-widget-deletebutton="false" style="margin-left:10%; margin-right:10%">
+        <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+        data-widget-colorbutton="false" 
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true" 
+        data-widget-sortable="false"   
+                                -->
+             <header>
+                <h2><strong>MANAGE CLASSES</strong></h2>               
+             </header>
+                <!-- widget div-->
+    <div>       
+       <!-- widget edit box -->
+         <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
+            <input class="form-control" type="text">
+            <span class="note"><i class="fa fa-check text-success"></i> Change title to update and save instantly!</span>      
+          </div>
+                <!-- end widget edit box -->
+                <!-- widget content -->
+            <div class="widget-body ">
+                <div class="widget-body-toolbar"> 
+                    
+                    <div class="row alert alert-info no-margin fade in">    
+                         <?php $form = $this->form;
+                        $form->setAttribute('action', $this->url('classes',array('action'=> 'add','controller' => 'class')));
+                         $form->setAttribute('class', 'smart-form');
+                        $form->prepare(); ?>
+                        <?php echo $this->form()->openTag($form); ?>
+                
+                                       
+                       <div class="rows"> 
+                                         <section class="col col-3">
+                                            <label class="select">
+                                          <?php echo $this->formElementErrors($form->get('section')); ?>
+                                            <?php echo $this->formSelect($form->get('section')); ?></label>
+                                        </section>
+                                          
+                                          <section class="col col-3">
+                                            <label class="select">
+                                         <?php echo $this->formElementErrors($form->get('initial')); ?>
+                                            <?php echo $this->formSelect($form->get('initial')); ?></label>
+                                        </section> 
+
+                                         <section class="col col-3">
+                                            <label class="select">
+                                        <?php echo $this->formElementErrors($form->get('arm')); ?>
+                                            <?php echo $this->formSelect($form->get('arm')); ?></label>
+                                        </section> 
+
+
+                                         <section class="col col-2">
+                                           <?php echo $this->formRow($form->get('submit')); ?> 
+                                        </section>   
+                                                      
+                                      
+                                             <?php echo $this->form()->closeTag(); ?>
+                                        </div>
+                             
+                    </div>
+                
+                </div>
+                                        
+                <div class="custom-scroll table-responsive" >
+                    <table id="class-table" data-show-export="true" data-pagination="true" data-click-to-select="true"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th data-sortable="true">Section</th>
+                                <th>Initial</th>
+                                <th>Arms</th>
+                                <th data-sortable="true">Name</th>
+                                <th >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody><?php foreach ($classes as $class) : ?>
+                            <tr>
+                    
+                    <td><?php echo $this->escapeHtml($class->getSection()->getName());?></td>
+                    <td><?php echo $this->escapeHtml($class->getInitial()->getName());?></td>
+                    <td><?php echo $this->escapeHtml($class->getArm()->getName());?></td>
+                    <td><?php echo $this->escapeHtml($class->getName());?></td>
+                    <td>
+
+<a id="conf" href="<?php echo $this->url('classes',array('controller' => 'class','action'=>'delete', 'id' => $class->getid()));?>"onclick="return confirm('Do you rely want to delete this class?')"><button class="btn btn-xs btn-danger"><i class='glyphicon glyphicon-trash'></i></button></a>
+                    </td>                                                        
+                        </tr><?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+        
+          </div>
+                                    <!-- end widget content --> 
+        </div>
+        <!-- end widget div -->   
+    </div>
+    <!-- end widget -->
+</article>
+<script type="text/javascript">
+    
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+  $('#class-table').bootstrapTable({
+
+            });  var pagefunction = function() {
+        // clears the variable if left blank
+        
+    };
+     loadScript("/bot/bootstrap-table.js");
+    
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+     
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+    
+</script>

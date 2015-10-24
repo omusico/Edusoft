@@ -1,0 +1,247 @@
+ <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="jarviswidget" id="wid-id-0">
+
+        <header>
+            <h2>Route  Settings</h2>
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                       
+                                    <div class="col-md-5">
+                                    <div class="alert alert-info alert-block">
+                                                        <i class="fa-fw fa fa-info"></i>
+                                                     Click <span class="label label-success">New Route Settings</span> to add more row
+                                        </div>
+                                    </div>
+
+                                                               
+                                            <a id="more" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-cloud-download"></i> New Row Settings</a>
+                                                             
+                                            <a id="less" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove last Row Settings</a>
+                                                               
+                                            <button onclick="document.getElementById('rsettings').submit();" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-floppy-saved"></i> Save Settings</button>
+                                       
+                               
+                                   
+                                </div>
+                        
+                </div> 
+                    <div class="row">
+
+
+                        <form id="rsettings" name="rsettings" class="smart-form"  action="/transport/process" method="post">
+                               
+                                    <table class="table" id="route-settings">
+                                        <tbody>
+                                        <tr class="set">
+                                        <td>
+                                         <section class=""><label class="select"><i></i>
+                                         <select class="" id="section" name="route[]" required="required">
+                                            <option value="">select route</option>
+                                                <?php if($routes): ?>
+                                                         <?php foreach($routes as $route): ?>
+                                                            <option value="<?php echo $route['id']; ?>"><?php echo $route['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                        </section>
+                                         </td>
+                                         <td>
+                                        <section class=""><label class="select"><i></i>
+                                         <select class="" id="driver" name="driver[]" required="required">
+                                            <option value="">select driver</option>
+                                                <?php if($drivers): ?>
+                                                         <?php foreach($drivers as $driver): ?>
+                                                            <option value="<?php echo $driver['d_id']; ?>"><?php echo $driver['d_fname']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                         </section>
+                                         </td>
+                                         <td>
+                                         <section class=""><label class="select"><i></i>
+                                            <select class="" id="vehicle" name="vehicle[]" required="required">
+                                            <option value="">select vehicle </option>
+                                                <?php if($vehicles): ?>
+                                                         <?php foreach($vehicles as $vehicle): ?>
+                                                            <option value="<?php echo $vehicle['id']; ?>"><?php echo $vehicle['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                         </section>
+                                         </td>
+                                         <td>
+                                           <section class=""><label class="input"><i></i>
+                                            <input type="text" class="form-control" id="fare" name="fare[]"  required="required" placeholder="Enter fare amount">
+                                         </section>
+                                         </td>                                         
+                                     </tr>
+                                 </tbody>
+                                    </table>
+                                                                        
+                                </form>
+                                   
+                     </div>
+                     <hr></hr>
+                     <div class="row">
+                        <div class="col col-sm-12">
+
+                        <table id="rs" data-show-export="true" data-pagination="true" data-click-to-select="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered ">
+                        <thead> 
+                            <tr>
+                                <th><span class="text-danger">#</span> Session</th>
+                                <th><i class="fa fa-user txt-color-green hidden-md hidden-sm hidden-xs"></i> Driver</th>
+                                <th><i class="fa fa-road text-success hidden-md hidden-sm hidden-xs"></i> Route name</th>
+                                <th><i class="fa fa-car text-warning hidden-md hidden-sm hidden-xs"></i> Vehicle Name</th>
+                                <th><span class="text-danger">#</span> Tp fare</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if($sessionroutes):?>         
+                    <?php foreach ($sessionroutes as $sr) : ?>
+                            <tr> 
+        <td><?php echo $sr['y_name']. '-' .$sr['t_name'];?></td>
+        
+        <td><?php echo $sr['d_fname'];?></td>
+        <td><?php echo $sr['r_name'];?></td>
+        <td><?php echo $sr['v_name'];?></td>
+        <td><?php echo $sr['s_fare'];?></td>
+        
+                            </tr> 
+                           <?php endforeach; ?><?php endif;?>
+                        </tbody>
+                    </table>
+                </div>
+                     </div>
+
+
+
+
+
+
+
+
+
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
+</article>
+
+<script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+        // clears the variable if left blank
+         $("#more").click(function() {
+ $('#route-settings tbody>tr:last')
+    .clone(true)
+    .insertAfter('#route-settings tbody>tr:last').hide().fadeIn().find('input').each(function(){
+        $(this).val('');
+    });
+});
+
+
+  $("#less").click(function() {
+ $('#route-settings tbody>tr:last-child')
+    .remove()
+  
+    });
+
+
+    };
+    
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>

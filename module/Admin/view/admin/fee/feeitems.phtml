@@ -1,0 +1,48 @@
+<div class="row">
+<div class="col-sm-12">
+
+
+<div class="well well well-sm well-light">
+    <div style="border-color:#B9CEEC; border-width:2px 0px 0px; margin-top:8px; margin-bottom:15px;">
+        <div class="alert alert-info alert-block">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button><i class="fa-fw fa fa-info"></i>
+                                               <?php echo $feetotal->getSection()->getName();?> Section Fee For <?php echo $feetotal->getYear()->getName();?>
+
+                                            </div>
+        </div>
+ 
+        <div class="row">
+            <div class="col col-sm-12">
+
+                      <table class="table table-bordered">
+                        
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Amount</th>
+                           </tr>
+                       <?php foreach ($feeitems as $feeitem) : ?>
+                        <tbody>
+                            <tr>
+                    
+                       <td><?php echo $feeitem->getItems();?></td>
+                       <td><?php echo $feeitem->getAmount();?></td>                                          
+                           </tr>
+                    <?php endforeach; ?>
+                     <tr>
+                    
+                       <td><strong>Total Fee</strong></td>
+                       <td><strong><?php echo $feetotal->getAmount();?></strong></td>                                          
+                           </tr>
+                        </tbody>
+                    </table>
+
+            </div>
+
+                                                 
+
+        </div>
+</div>
+</div>
+</div>

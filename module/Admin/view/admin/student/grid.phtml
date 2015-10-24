@@ -1,0 +1,38 @@
+<article class="col-sm-12 col-md-12 col-lg-12">
+	<table id="grid" class="display projects-table table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th></th><th>Projects</th><th><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> EST</th>
+            <th>Contacts</th>
+            <th>Status</th>
+         </tr>
+    </thead>
+</table>
+<article>
+
+
+
+<script>
+	$(document).ready(function () {
+
+    $('#grid').dataTable({
+        "bServerSide": true,
+        "sAjaxSource": "/student/gride",
+        "bProcessing": true,
+        "aoColumns": [
+                        { "sName": "ID",
+                            "bSearchable": false,
+                            "bSortable": false,
+                            "fnRender": function (oObj) {
+                                return '<a href=\"Details/' + 
+                                oObj.aData[0] + '\">View</a>';
+                            }
+                        },
+                        { "sName": "fname" },
+                        { "sName": "lname" },
+                        { "sName": "dob" }
+                    ]
+    });
+}); 
+
+</script>

@@ -1,0 +1,132 @@
+<div class="row">
+<div class="col-sm-12">
+
+
+<div class="well well well-sm well-light">
+    <div style="border-color:#B9CEEC; border-width:2px 0px 0px; margin-top:8px; margin-bottom:15px;">
+        <div class="alert alert-info alert-block">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button><i class="fa-fw fa fa-info"></i>
+                                                <a  data-dismiss="modal" data-toggle="modal" data-target="#itemsx" href="<?php echo $this->url('trait',array('controller' => 'trait','action'=>'edititems', 'id' => $this->id));?>"><button type="button" class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i> <span class="hidden-mobile">Edit</span></button></a> 
+                                            </div>
+        </div>
+ 
+        <div class="row">
+            <div class="col col-sm-12">
+
+                      <table class="table table-bordered">
+                        
+                            <tr>
+                                <th>Name</th>
+                                <th>Remark</th>
+                           </tr>
+                           <?php if($items):?>
+                       <?php foreach ($items as $item) : ?>
+                        <tbody>
+                            <tr>
+                       <td><?php echo $item->getName();?></td>
+                       <td><?php echo $item->getRemark();?></td>                                          
+                           </tr>
+                    <?php endforeach; ?>
+                  <?php endif;?>
+                        </tbody>
+                    </table>
+
+            </div>
+
+                                                 
+
+        </div>
+</div>
+</div>
+</div>
+<script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+        // clears the variable if left blank
+    };
+    
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>

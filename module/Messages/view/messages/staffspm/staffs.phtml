@@ -1,0 +1,120 @@
+<h2 class="email-open-header">
+    Compose New Email <span class="label txt-color-white">TO ALL STAFFS</span>
+    <a href="javascript:void(0);" rel="tooltip" data-placement="left" data-original-title="Print" class="txt-color-darken pull-right"><i class="fa fa-print"></i></a>   
+</h2>
+<?php $form = $this->form;
+                $form->setAttribute('action', $this->url('messages',array('action'=> 'staffs','controller' => 'messages')));
+                $form->setAttribute('class', 'form-horizontal');
+                $form->setAttribute('id', 'email-compose-form');
+                $form->prepare(); ?>
+                <?php echo $this->form()->openTag($form); ?>
+
+<!--<form  action="messages/compose" method="POST" class="form-horizontal" id="email-compose-form">-->
+
+       
+  
+    <div class="inbox-info-bar no-padding">
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-md-2"><strong>Subject</strong></label>
+                <div class="col-md-10">
+                    <?php echo $this->formInput($form->get('subject')); ?>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+
+    
+    <div class="inbox-message no-padding">
+    
+            
+                 <?php echo $this->formTextarea($form->get('message')); ?>    
+         
+    </div>
+    
+    <div class="footer">
+<?php echo $this->formRow($form->get('submit')); ?>                               
+    </div>
+
+ <?php echo $this->form()->closeTag(); ?>
+
+
+<script type="text/javascript">
+    
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    //pageSetUp();
+    
+    //here we only run
+    runAllForms();
+
+     // PAGE RELATED SCRIPTS
+
+    $(".table-wrap [rel=tooltip]").tooltip();
+
+    /*
+     * SUMMERNOTE EDITOR
+     */
+    loadScript("js/plugin/summernote/summernote.min.js", iniEmailBody);
+
+    function iniEmailBody() {
+        $('#emailbody').summernote({
+            height: '100%',
+            focus: false,
+            tabsize: 2
+        });
+    }
+
+    $(".show-next").click(function () {
+        $this = $(this);
+        $this.hide();
+        $this.parent().parent().parent().parent().parent().next().removeClass("hidden");
+    })
+
+     $("#send").click(function () {
+
+        var $btn = $(this);
+        $btn.button('loading');
+
+        // wait for animation to finish and execute send script
+        setTimeout(function () {
+            //Insert send script here
+
+
+            // Load inbox once send is complete
+            loadURL("/messages/list", $('#inbox-content > .table-wrap'))
+
+        }, 1000); // how long do you want the delay to be? 
+    });
+    
+    
+</script>

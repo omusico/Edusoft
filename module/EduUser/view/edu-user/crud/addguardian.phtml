@@ -1,0 +1,76 @@
+
+	<article class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			
+
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-0">
+								<!-- widget options:
+									usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+									data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="true" 
+									data-widget-sortable="false"
+									
+								-->
+								<header>
+									<h2>Create Guardian User</h2>				
+									
+								</header>
+
+								<!-- widget div-->
+								<div>
+									
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										
+										
+									</div>
+									<!-- end widget edit box -->
+									
+									<!-- widget content -->
+										<div class="widget-body no-padding">
+										<?php $form = $this->form;
+				 $form->setAttribute('action', $this->url('crud',array('action'=> 'addguardian','controller' => 'crud')));
+        		 $form->setAttribute('class', 'smart-form');
+        		  $form->setAttribute('role', 'form');
+				 $form->prepare(); ?>
+				<?php echo $this->form()->openTag($form);?>
+						
+							<div class="col-12">
+										<fieldset>
+				                        <div class="row"> 
+				                        	<section class="col col-5">
+				                        		 <label class="select">
+				                            <?php echo $this->formSelect($form->get('guardian')); ?> </label> 
+				                            <?php echo $this->formElementErrors($form->get('guardian')); ?>
+				                        	</section>
+
+				                        
+				                    </fieldset>
+				                       
+				          				 
+				           		
+				            	</div>
+				            
+				            <footer >  
+				                        	<?php echo $this->formRow($form->get('submit')); ?>           
+                        			</footer>
+				                        	 <?php echo $this->form()->closeTag(); ?>
+									</div>
+									<!-- end widget content -->	
+								</div>
+								<!-- end widget div -->
+								
+							</div>
+							<!-- end widget -->
+</article>
+
+
+
+ 

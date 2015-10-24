@@ -1,0 +1,106 @@
+<table id="inbox-table" data-show-export="true" data-pagination="true" data-click-to-select="true"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered table-hover table-striped">
+	 <thead> 
+                            <tr>
+                            	<th class="hidden-md hidden-lg hidden-xs hidden-sm"></th>
+                            	<th></th>
+                                <th>From</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+	<tbody>
+		  <?php if($lists):?>         
+          <?php foreach ($lists as $list) : ?>
+		<tr id="msg1" class="unread">
+			<td class="hidden-md hidden-lg hidden-xs hidden-sm"><?php echo $list['m_id'];?>
+			</td>
+			<td class="inbox-table-icon">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" class="checkbox style-2">
+						<span></span> </label>
+				</div>
+			</td>
+			<td class="inbox-data-from hidden-xs hidden-sm">
+				<div>
+					  <?php echo $list['u_displayName'];?>
+				</div>
+			</td>
+			<td class="inbox-data-message">
+				<div>
+					<span class="label bg-color-orange"><?php echo $list['m_subject'];?></span>
+				</div>
+			</td>
+			
+			<td class="inbox-data-date hidden-xs">
+				<div>
+					<span class="pull-right"><?php echo $this->privateSmartTime()->fromDateTime($list['m_date']->format('d/m/Y')); ?></span>
+				</div>
+			</td>
+			<td>
+			 <a href="<?php echo $this->url('messages',array('controller' => 'messages','action'=>'delete', 'id' => $list['m_id']));?>"><button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i>Delete</button></a>  
+			</td>
+ 
+		</tr>
+		<?php endforeach; ?><?php endif;?>
+
+	</tbody>
+</table>
+
+<script>
+	
+	//Gets tooltips activated
+	$("#inbox-table [rel=tooltip]").tooltip();
+
+	$("#inbox-table input[type='checkbox']").change(function() {
+		$(this).closest('tr').toggleClass("highlight", this.checked);
+	});
+
+	$('#inbox-table').on('click', 'tr', function() {
+    var state = $(this).find('td:eq(0)').text();
+
+   	 $.ajax({	//create an ajax request to load_page.php
+		type: "POST",
+		url: "/messages/opened",
+		data: {state: state},	//with the page number as a parameter
+		dataType: "html",	//expect html to be returned
+		success: function(msg){
+
+			if(parseInt(msg)!=0)	//if no errors
+			{
+				$('#inbox-content > .table-wrap').html(msg);	//load the returned html into pageContet
+				//$('#loading').css('visibility','hidden');	//and hide the rotating gif
+			}
+		}
+
+	});
+  //	loadURL("/messages/opened", 'first',$('#inbox-content > .table-wrap'));
+
+});
+
+
+	$('.inbox-table-icon input:checkbox').click(function() {
+		enableDeleteButton();
+	})
+
+	$(".deletebutton").click(function() {
+		$('#inbox-table td input:checkbox:checked').parents("tr").rowslide();
+		//$(".inbox-checkbox-triggered").removeClass('visible');
+		//$("#compose-mail").show();
+	});
+
+	function enableDeleteButton() {
+		var isChecked = $('.inbox-table-icon input:checkbox').is(':checked');
+
+		if (isChecked) {
+			$(".inbox-checkbox-triggered").addClass('visible');
+			//$("#compose-mail").hide();
+		} else {
+			$(".inbox-checkbox-triggered").removeClass('visible');
+			//$("#compose-mail").show();
+		}
+	}
+	$('#inbox-table').bootstrapTable({ });
+	
+</script>

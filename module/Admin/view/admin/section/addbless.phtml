@@ -1,0 +1,114 @@
+<?php echo $this->headScript()
+            
+            ->appendFile($this->basePath() . '/js/jquery-2.1.1.min.js')
+            ->appendFile($this->basePath() . '/js/jquery-ui-1.10.3.min.js')
+            ->appendFile($this->basePath() . '/js/app.config.js')
+            ->appendFile($this->basePath() . '/js/bootstrap.min.js')
+            ->appendFile($this->basePath() . '/js/notification/SmartNotification.min.js')
+           // ->prependFile($this->basePath() . '/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js')
+            ->appendFile($this->basePath() . '/js/smartwidgets/jarvis.widget.min.js')
+            ->appendFile($this->basePath() . '/js/plugin/masked-input/jquery.maskedinput.min.js')
+            ->appendFile($this->basePath() . '/js/plugin/select2/select2.min.js')
+            ->appendFile($this->basePath() . '/js/plugin/bootstrap-slider/bootstrap-slider.min.js')
+            
+            ->appendFile($this->basePath() . '/js/plugin/msie-fix/jquery.mb.browser.min.js')
+            ->appendFile($this->basePath() . '/js/plugin/msie-fix/jquery.mb.browser.min.js')
+            ->appendFile($this->basePath() . '/js/plugin/pace/pace.min.js')
+           
+        	->appendFile($this->basePath() . '/js/demo.min.js')
+        	 ->appendFile($this->basePath() . '/js/app.min.js')
+            ->appendFile($this->basePath() . '/js/academicsession/formedit.js')
+
+         //  ->prependFile('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js', 'text/javascript')
+         //        ->prependFile('http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js', 'text/javascript')
+                //    ->appendFile('/jqGrid/js/i18n/grid.locale-en.js', 'text/javascript')
+                //    ->appendFile('/jqGrid/plugins/ui.multiselect.js', 'text/javascript')
+                  ->appendFile($this->basePath() .'/js/plugin/jquery-validate/jquery.validate.min.js');?>
+
+
+	<article class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+			
+
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-0">
+								<!-- widget options:
+									usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+									data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="true" 
+									data-widget-sortable="false"
+									
+								-->
+								<header>
+									<h2>Edit section</h2>				
+									
+								</header>
+
+								<!-- widget div-->
+								<div>
+									
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										
+										
+									</div>
+									<!-- end widget edit box -->
+									
+									<!-- widget content -->
+									<div class="widget-body">
+										<?php $form = $this->form;
+				
+							$form->setAttribute('action', $this->url('section',array('action'=> 'addbless','controller' => 'section')));
+							$form->prepare(); ?>
+							<?php echo $this->form()->openTag($form); 
+							
+							$section = $form->get('section'); ?>
+														
+				
+												<section class="col-6">
+													<label>Section Name</label>
+													<div class="input-group">
+														<?php echo $this->formInput($section->get('name')); ?>
+														<span class="input-group-addon"><i class="fa fa-file-text-o "></i></span>
+													</div>
+												</section>
+												
+												<section class="col-6">
+													<label>Section Description</label>
+													<div class="input-group">
+														<?php echo $this->formInput($section->get('description')); ?>
+														<span class="input-group-addon"><i class="fa fa-file-text-o "></i></span>
+													</div>
+												</section>
+				
+												<section class="col-12">
+													<label>Association Subjects</label>
+													<div class="input-group">
+														<?php echo $this->formMultiCheckbox($section->get('subject')); ?>
+													</div>
+												</section>
+				
+													<div class="row">
+														<div class="col-md-12 text-right">
+															
+															<?php echo $this->formRow($form->get('submit')); ?>
+															<?php echo $this->form()->closeTag(); ?>
+														</div>
+													</div>
+				
+									<!-- end widget content -->	
+								</div>
+								<!-- end widget div -->
+								
+							</div>
+							<!-- end widget -->
+</article>
+
+
+

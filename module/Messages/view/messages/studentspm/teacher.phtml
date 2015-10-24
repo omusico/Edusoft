@@ -1,0 +1,133 @@
+<h2 class="email-open-header">
+    Compose New Email <span class="label txt-color-white">DRAFT</span>
+    <a href="javascript:void(0);" rel="tooltip" data-placement="left" data-original-title="Print" class="txt-color-darken pull-right"><i class="fa fa-print"></i></a>   
+</h2>
+
+
+<form  action="studentspm/teacher" method="POST" class="form-horizontal" id="email-compose-form">
+
+    <div class="inbox-info-bar no-padding">
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-md-1"><strong>To</strong></label>
+                <div class="col-md-11">
+                   <select multiple style="width:100%" class="select2" data-select-search="true" required="required">
+                    <option value="">select teacher</option>
+                        <?php if($class): ?>
+                         <?php foreach($class as $teacher): ?>
+                         <option value="<?php echo $teacher->getStaff()->getUser()->getId(); ?>"><?php echo $teacher->getSubject()->getCode(). ' - ' .$teacher->getStaff()->getUser()->getEmail(); ?></option>
+                        <?php endforeach; ?>
+                     <?php endif; ?>
+                     </select>
+                 </div>
+            </div>
+        </div>  
+    </div>
+    
+  
+    <div class="inbox-info-bar no-padding">
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-md-2"><strong>Subject</strong></label>
+                <div class="col-md-10">
+                    <input name="subject" id="subject" class="form-control" placeholder="Email Subject" type="text">
+                </div>
+            </div>
+        </div>  
+    </div>
+
+
+    
+    <div class="inbox-message no-padding">
+     <input name="subject" id="subject" class="form-control" placeholder="Email Subject" type="textarea">   
+         
+    </div>
+    
+<button data-loading-text="&lt;i class='fa fa-refresh fa-spin'&gt;&lt;/i&gt; &nbsp; Sending..." class="btn btn-primary pull-right" type="button" id="send">
+        Send <i class="fa fa-arrow-circle-right fa-lg"></i>
+    </button>
+
+
+    </div>
+
+</form>
+
+
+<script type="text/javascript">
+    
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    //pageSetUp();
+    
+    //here we only run
+    runAllForms();
+
+     // PAGE RELATED SCRIPTS
+
+    $(".table-wrap [rel=tooltip]").tooltip();
+
+    /*
+     * SUMMERNOTE EDITOR
+     */
+    loadScript("js/plugin/summernote/summernote.min.js", iniEmailBody);
+
+    function iniEmailBody() {
+        $('#emailbody').summernote({
+            height: '100%',
+            focus: false,
+            tabsize: 2
+        });
+    }
+
+    $(".show-next").click(function () {
+        $this = $(this);
+        $this.hide();
+        $this.parent().parent().parent().parent().parent().next().removeClass("hidden");
+    })
+
+     $("#send").click(function () {
+
+        var $btn = $(this);
+        $btn.button('loading');
+
+        // wait for animation to finish and execute send script
+        setTimeout(function () {
+            //Insert send script here
+
+
+            // Load inbox once send is complete
+            loadURL("/messages/list", $('#inbox-content > .table-wrap'))
+
+        }, 1000); // how long do you want the delay to be? 
+    });
+    
+    
+</script>

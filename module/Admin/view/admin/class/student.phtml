@@ -1,0 +1,239 @@
+ <article class="col-xs-12 col-sm-12 col-md-10 col-lg-11">
+
+    <div class="jarviswidget" id="wid-id-0">
+
+        <header>
+            <h2>Class View</h2>
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="alert alert-info alert-block">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button><i class="fa-fw fa fa-info"></i>
+                                               Use the form below to search and view the detail of a class in a given year
+
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+
+
+                                        <div class="row">
+                                             
+                                               <form  class="smart-form"  action="/classes/student" method="post">
+                                
+                                         <section class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><label class="select"><i></i>
+                                         <select class="select2" id="year" name="year">
+                                            <option value="">Please select a session</option>
+                                                <?php if($sessions): ?>
+                                                         <?php foreach($sessions as $session): ?>
+                                                            <option value="<?php echo $session['id']; ?>"><?php echo $session['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select></label>
+                                        </section>
+                                        <section class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><label class="select"><i></i>
+                                         <select class="select2" id="class" name="class">
+                                            <option value="">Please select a class</option>
+                                                <?php if($sections): ?>
+                                                         <?php foreach($sections as $section): ?>
+                                                            <option value="<?php echo $section['id']; ?>"><?php echo $section['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select></label>
+                                         </section>       
+                                            <button type="submit" class="btn  btn-success"><i class="fa  fa-search"></i> Search</button>
+                                              </form>       
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-mobile"></i> SMS</button>
+                                            <button type="submit" class="btn btn-warning"><i class="fa fa-envelope"></i> Message</button>
+                                       
+                                
+                                </div>
+                            </div>
+      
+       </div> 
+
+
+<div class="col-sm-12">
+
+
+<div class="well well well-sm well-light">
+   <div class="widget-body-toolbar">
+    <?php if($staffs);?>
+<?php foreach ($staffs as $staff) {?>
+        <div class="row ">
+            <div class="col col-sm-6">
+               <table class="table table-border">
+                                                
+                    <tbody>
+                        <tr >
+                            <td style="padding:3px 0; border:none;"><label class="text-info font-sm">Class Name:</label></td>
+                            <td style="padding:3px 0; border:none;"><?php echo $staff['c_name'];?></td>
+                        </tr>
+                        <tr >
+                            <td style="padding:3px 0; border:none;"><label class="text-info font-sm">Session:</label></td>
+                            <td style="padding:3px 0; border:none;"><?php echo $staff['y_name'];?></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:3px 0; border:none;"><label class="text-info font-sm">Form Master:</label> </td>
+                            <td style="padding:3px 0; border:none;"><?php echo  $staff['ts_fname']. '  ' . $staff['ts_lname'].' '. $staff['ts_mname'];?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col-sm-6 text-right">
+                    <img src="<?php echo $this->basePath?>/data/uploads/staffs/<?php echo  $staff['ts_image'];?>" alt="staff pic" style="max-width:70px; border:5px solid #fff;"/>
+            </div>
+
+            <?php };?>                                         
+
+        </div>
+    </div>
+
+                       
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th ><input class="checkbbox" type="checkbox" name="ids"></th>
+                                <th>Photo</th>
+                                <th>Admission No</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        
+                        </thead> <?php if($students);?>
+                        <?php foreach ($students as $student) {?>
+                        <tbody>
+                             
+                            <tr>
+                    <td style="width:5%;"><input class="checkbbox" type="checkbox" name="ids" value="<?php echo $student['p_id'];?>"></td>
+                    <td style="width:15%;"><img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo $student['s_image']?>" alt="student pic" style="max-width:30px; border:2px solid #FFF;"></td>
+                    <td><?php echo $student['s_admNo']?></td>
+                    <td><?php echo $student['p_fname'].' '.$student['p_lname'].' '.$student['p_mname']?></td>
+                    <td>
+
+                         <a data-dismiss="modal" data-toggle="modal" data-target="#edit" href="<?php echo $this->url('student',array('controller' => 'student','action'=>'viewfull', 'id'=>$student['s_id']));?>"><button type="button" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-zoom-in"></i> view details</button></a> 
+                    </td>                                                        
+                        </tr>
+                   
+                        </tbody>
+                        <?php };?>
+                    </table>
+             </div>
+
+    </div>
+</div>
+</div>
+</div>
+        
+</article>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:700px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+<script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+        // clears the variable if left blank
+    };
+    
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>

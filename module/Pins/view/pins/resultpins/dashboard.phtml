@@ -1,0 +1,172 @@
+ <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="jarviswidget" id="wid-id-9854">
+
+        <header>
+            <h2>Result Pins</h2>
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  
+                                         <button data-toggle="modal" data-target="#items"  href="<?php echo $this->url('resultpins',array('controller' => 'resultpins','action'=>'create'));?>" class="btn btn-primary">
+                                                        <i class="fa fa-plus"></i> <span class="hidden-mobile">Create Pins</span>
+                                                    </button>
+                                 
+                                     
+                                </div>
+                                </div>
+
+                </div> 
+
+
+
+    <table id="pintable" data-show-export="true" data-pagination="true" data-click-to-select="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered ">
+                        <thead> 
+                            <tr>
+                                <th>Pins</th>
+                                <th>Session</th>
+                                <th>Section</th>
+                                <th>Date Created</th>
+                                <th>Date Activated</th>
+                                <th>Student ID</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if($pins):?>         
+                    <?php foreach ($pins as $pin) : ?>
+                            <tr> 
+        <td><?php echo $pin['r_pin'];?></td>
+        <td><?php echo $pin['y_name']. ' - ' .$pin['t_name'];?></td>
+        <td><?php echo $pin['sec_name'];?></td>
+        <td><?php echo $pin['r_created_at']->format('d/m/Y');?></td>
+        <td><?php if($pin['r_activated_at']){echo $pin['r_activated_at']->format('d/m/Y');};?></td>
+        <td><?php echo $pin['s_admNo'];?></td>
+ 
+                            </tr> 
+                           <?php endforeach; ?><?php endif;?>
+                        </tbody>
+                    </table>
+                                        
+
+
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
+</article>
+
+<div class="modal fade" id="items" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:900px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+                <script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+         $('#pintable').bootstrapTable({
+
+            });
+          
+
+    };
+    loadScript("/bot/bootstrap-table.js");
+    //loadScript("js/edusoft.js", pagefunction);
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>

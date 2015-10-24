@@ -1,0 +1,30 @@
+<?php
+namespace Admin\Form\Element;
+
+use Zend\InputFilter\InputProviderInterface;
+use Zend\Form\Element\Date;
+
+class HydratedDate extends Date implements InputProviderInterface
+{
+    /**
+     * @see \Zend\Form\Element\DateTime::getInputSpecification()
+     * @return array
+     */
+    public function getInputSpecification()
+    {
+        return array(
+                'name' => $this->getName(),
+                'required' => true,
+                'filters' => array(
+                        array('name' => 'Zend\Filter\StringTrim'),
+                        array(
+                                'name'      => 'Admin\Filter\DateToDateTime',
+                                'options'   => array(
+                                        'format' => $this->getFormat(),
+                                ),
+                        ),
+                ),
+                'validators' => $this->getValidators(),
+        );
+    }
+}

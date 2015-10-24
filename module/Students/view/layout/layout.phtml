@@ -1,0 +1,429 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en" style='background-image: url("<?php echo $this->basePath('../img/pattern/graphy.png') ?>");'>
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Edusoft '. $this->translate('Cloud Base School Management System'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0') 
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                    
+                        
+                        
+                   
+                     ->prependStylesheet($this->basePath() . '/bot/bootstrap-table.css')
+                        ->prependStylesheet($this->basePath() . '/css/demo.min.css')
+                         //->prependStylesheet($this->basePath() . '/css/jquery.dynatable.css') 
+                         ->prependStylesheet($this->basePath() . '/css/erp-rtl.min.css') 
+                             ->prependStylesheet($this->basePath() . '/css/erp-skins.min.css') 
+                              ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/erp-production.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/erp-production-plugins.min.css')
+                            ->prependStylesheet($this->basePath() . '/css/font-awesome.min.css')
+                       ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+    </head>
+
+
+<body class="smart-style-1 container fixed-footer">
+
+    <!-- #HEADER -->
+    <header id="header">
+      <div id="logo-group">
+
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo"> <img src="<?php echo $this->basePath('../img/brain.png') ?>" alt="SmartAdmin" style="width:auto; height:39px;"> </span>
+        <!-- END LOGO PLACEHOLDER -->
+
+      </div>
+
+      <div class="project-context ">
+
+        <span class="label"><strong><?php echo $this->translate('Welcome'); ?>, <?php echo $this->zfcUserDisplayName() ?>! </strong></span>
+        <span class="project-selector dropdown-toggle" >     
+         <?php $sessions=$this->myHelper();
+         if(!empty($sessions)){
+            foreach ($sessions as $session):
+           $year = $this->escapeHtml($session['year']['name']);
+           $term = $this->escapeHtml($session['term']['name']);
+           endforeach; 
+       echo '      Academic Session :' .$year.' - '.$term;}?></span>
+
+        <!-- Suggestion: populate this list with fetch and push technique -->
+        
+
+      </div>
+     
+     
+
+      <!-- #TOGGLE LAYOUT BUTTONS -->
+      <!-- pulled right: nav area -->
+      <div class="pull-right">
+        
+        <!-- collapse menu button -->
+        <div id="hide-menu" class="btn-header pull-right">
+          <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+        </div>
+        <!-- end collapse menu -->
+        
+        <!-- #MOBILE -->
+        <!-- Top menu profile link : this shows only when top menu is active -->
+       
+
+        <!-- logout button -->
+        <div id="logout" class="btn-header transparent pull-right">
+          <span> 
+            <a href="<?php echo $this->url('zfcuser/logout') ?>"  rel="popover-hover" data-placement="bottom" data-original-title="Logout" data-content="Click on this button if you want to logout."  title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-power-off"></i></a> </span>
+        </div>
+        <!-- end logout button -->
+       
+
+        <!-- fullscreen button -->
+        <div id="fullscreen" class="btn-header transparent pull-right">
+          <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+        </div>
+        <!-- end fullscreen button -->
+
+         <!-- Welcome -->
+        
+        <!-- end welcom -->
+
+      </div>
+      <!-- end pulled right: nav area -->
+
+    </header>
+    <!-- END HEADER -->
+
+    <!-- #NAVIGATION -->
+    <!-- Left panel : Navigation area -->
+    <!-- Note: This width of the aside area can be adjusted through LESS variables -->
+    <aside id="left-panel">
+
+      <!-- User info -->
+      <div class="login-info">
+        <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+         
+          <img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo $this->picHelper();?>" style="max-width:100%; heigth:auto;"/>
+            
+         
+          
+        </span>
+      </div>
+      <!-- end user info -->
+
+      <!-- NAVIGATION : This navigation is also responsive-->
+      <nav>
+        <ul>
+          <li>
+            <a href="<?php echo $this->url('students');?>" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+          </li>
+
+       <li>
+            <a href="<?php echo $this->url('messages', array('action'=> 'inbox','controller' => 'messages')) ?>"><i class="fa fa-lg fa-fw fa-desktop" ></i> <span class="menu-item-parent">Messages </span></a>
+          </li> 
+
+          <li>
+            <a href="#"><i class="fa fa-lg fa-fw fa-graduation-cap" ></i> <span class="menu-item-parent">Profile </span></a>
+            <ul>
+              <li><a href="<?php echo $this->url('students', array('action'=> 'profile','controller' => 'students')) ?>">View profile</a></li>
+
+              <li><a href="<?php echo $this->url('students', array('action'=> 'edit','controller' => 'students')) ?>">Edit profile</a></li>
+              <li><a href="<?php echo $this->url('students', array('action'=> 'password','controller' => 'students')) ?>">Change password</a></li>
+              <li><a href="<?php echo $this->url('position', array('action'=> 'student','controller' => 'position')) ?>">Students  posts</a></li>
+            </ul>
+          </li>
+
+           <li>
+            <a href="#"><i class="fa fa-lg fa-fw fa-sitemap" ></i> <span class="menu-item-parent">News & events</span></a>
+            <ul>
+              <li><a href="#">News</a></li>
+               <li><a href="#">Events</a></li>
+            </ul>
+          </li>
+
+           <li>
+            <a href="#"><i class="fa fa-lg fa-fw fa-group" ></i> <span class="menu-item-parent">Subject teachers</span></a>
+            <ul>
+              <li><a href="<?php echo $this->url('students', array('action'=> 'teachers','controller' => 'teachers')) ?>">View teachers</a></li>
+            </ul>
+          </li>
+
+        
+
+          <li>
+            <a href="#"><i class="fa fa-lg fa-fw fa-calendar-o" ></i> <span class="menu-item-parent">Academic progress</span></a>
+            <ul>
+              <li><a href="<?php echo $this->url('students', array('action'=> 'progress','controller' => 'students')) ?>">Student progress</a></li>
+            </ul>
+          </li>
+          
+           <li>
+           <a href="#"><i class="fa fa-lg fa-fw fa-hospital-o" ></i> <span class="menu-item-parent">Result checking</span></a>
+             <ul>
+              <li><a href="<?php echo $this->url('students', array('action'=> 'pin','controller' => 'students')) ?>">View current</a></li>
+              <li><a href="<?php echo $this->url('students', array('action'=> 'preresult','controller' => 'students')) ?>">Previous result</a></li>
+            </ul>
+          </li>
+
+           <li>
+           <a href="<?php echo $this->url('students', array('controller'=>'students', 'action'=>'fee'))?>"><i class="fa fa-lg fa-fw fa-money" ></i> <span class="menu-item-parent">Fees </span></a>
+          </li>
+
+          <li>
+           <a href="#"><i class="fa fa-lg fa-fw fa-calendar" ></i> <span class="menu-item-parent">Attendance </span></a>
+           <ul>
+              <li><a href="<?php echo $this->url('students', array('contoller' => 'students','action' => 'attendance')); ?>"><stong>View attendance</stong></a></li> 
+            </ul>
+          </li>
+
+                     <li>
+            <a href="#"><i class="fa fa-lg fa-fw fa-trophy" ></i> <span class="menu-item-parent">Acheivement</span></a>
+            <ul>
+              <li><a href="#">Student progress</a></li>
+            </ul>
+          </li>
+
+          <li>
+           <a href="#"><i class="fa fa-lg fa-fw fa-car" ></i> <span class="menu-item-parent">Transportation</span></a>
+           <ul>
+              <li><a href="<?php echo $this->url('students', array('action'=> 'transportation','controller' => 'students')); ?>"><stong>View transport</stong></a></li>
+            </ul>
+          </li> 
+
+        </ul>
+      </nav>
+      <span class="minifyme" data-action="minifyMenu"> 
+        <i class="fa fa-arrow-circle-left hit"></i> 
+      </span>
+
+
+    </aside>
+    <!-- END NAVIGATION -->
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main" style="min-height:700px;">
+
+      <!-- RIBBON -->
+      <div id="ribbon">
+
+        <span class="ribbon-button-alignment"> 
+          <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+            <i class="fa fa-refresh"></i>
+          </span> 
+        </span>
+
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+         <?php echo $this->navigation()->breadcrumbs()->setMinDepth(0); // <-- Add this!! ?> 
+
+          
+
+
+
+      
+        </ol>
+        <!-- end breadcrumb -->
+
+        <!-- You can also add more buttons to the
+        ribbon for further usability
+
+        Example below:
+
+        <span class="ribbon-button-alignment pull-right">
+        <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+        <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+        <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+        </span> -->
+
+      </div>
+      <!-- END RIBBON -->
+      
+      
+
+      <!-- MAIN CONTENT -->
+      <div id="content">
+
+        <!-- row -->
+        <div class="row">
+          
+          <!-- col -->
+          <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            
+          </div>
+          <!-- end col -->
+          
+        </div>
+        <!-- end row -->
+        
+        <!--
+          The ID "widget-grid" will start to initialize all widgets below 
+          You do not need to use widgets if you dont want to. Simply remove 
+          the <section></section> and you can use wells or panels instead 
+          -->
+        
+        <!-- widget grid -->
+        <section id="widget-grid" class="">
+        
+          <!-- row -->
+          <div class="row">
+            
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="row"><div class="col-lg-12"><?php $this->NotificationsHelper();?></div></div>
+             <div class="row"><?php echo $this->content; ?></div>
+        
+            </article>
+            <!-- WIDGET END -->
+            
+          </div>
+        
+          <!-- end row -->
+        
+        
+        </section>
+        <!-- end widget grid -->
+
+      </div>
+      <!-- END MAIN CONTENT -->
+
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <!-- PAGE FOOTER -->
+    <div class="page-footer">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <span class="txt-color-white">Edusoft 1.5 <span class="hidden-xs"> - School Management System</span> © 2014-2015</span>
+        </div>
+      </div>
+    </div>
+    <!-- END PAGE FOOTER -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+    -->
+    
+    </div>
+    <!-- END SHORTCUT AREA -->
+
+    <!--================================================== -->
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+  
+
+     <?php echo $this->headScript()  
+                        
+            ->prependFile($this->basePath() . '/js/smartwidgets/jarvis.widget.min.js')
+            //->prependFile($this->basePath() . 'js/notification/SmartNotification.min.js')
+            ->prependFile($this->basePath() . 'js/plugin/jquery-validate/jquery.validate.min.js')
+            ->prependFile($this->basePath() . '/js/plugin/pace/pace.min.js')
+            ->prependFile($this->basePath() . '/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js')
+            ->prependFile($this->basePath() . '/js/smartwidgets/jarvis.widget.min.js')
+          
+            ->prependFile($this->basePath() . '/js/plugin/select2/select2.min.js')
+            ->prependFile($this->basePath() . '/js/demo.min.js')
+
+           
+            //->prependFile($this->basePath() . '/js/edusoft.js')
+            ->prependFile($this->basePath() . '/js/app.min.js')
+            ->prependFile($this->basePath() . '/js/app.config.js')
+            ->prependFile($this->basePath() . '/bot/bootstrap-table.js')
+            ->prependFile($this->basePath() . '/js/bootstrap/bootstrap.min.js')
+            //->prependFile($this->basePath() . 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+           // ->prependFile($this->basePath() . 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+            // ->prependFile($this->basePath() . '/js/imagelightbox.js')
+           //   ->prependFile($this->basePath() . '/js/jquery.json.js')
+            ->prependFile($this->basePath() . '/js/jquery-ui-1.10.3.min.js')
+            ->prependFile($this->basePath() . '/js/jquery-2.1.1.min.js')
+        ; ?>
+
+
+          <?php echo $this->inlineScript() ?>
+    <!-- Demo purpose only -->
+   
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script>
+    function showimagepreview(input) {
+        if (input.files && input.files[0]) {
+        var filerdr = new FileReader();
+        filerdr.onload = function(e) {
+        $('#imageupload').attr('src', e.target.result);
+        }
+        filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+
+
+         function showpreview(input) {
+        if (input.files && input.files[0]) {
+        var filerdr = new FileReader();
+        filerdr.onload = function(e) {
+        $('#imageuploads').attr('src', e.target.result);
+        }
+        filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+    
+   $("#sectionx").change(function(){
+    var state = $("#sectionx").val();
+    var myData = {state: state};
+    //The post using ajax
+      $.ajax({
+              type:"POST",
+              url:"/result/class",
+              data:myData,
+              success: function(data){
+                                 
+                             var st=""
+             for(i in data){
+                st+="<option id='"+data[i].id+"'>"+data[i].name+"</option>"
+              }
+               $("#classx").html(st);
+
+              },
+         
+             });
+  });
+
+
+         $("#classx").change(function(){
+    var state = $("#classx").val();
+    var myData = {state: state};
+    //The post using ajax
+      $.ajax({
+              type:"POST",
+              url:"/result/student",
+              data:myData,
+              success: function(data){
+                                 
+                             var st=""
+             for(i in data){
+                st+="<option id='"+data[i].id+"'>"+data[i].admNo+"</option>"
+              }
+               $("#studentx").html(st);
+
+              },
+         
+             });
+  });
+
+
+    </script>
+  
+  </body>
+
+</html>

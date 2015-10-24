@@ -1,0 +1,99 @@
+
+	<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			
+
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-0">
+								<!-- widget options:
+									usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+									data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="true" 
+									data-widget-sortable="false"
+									
+								-->
+								<header>
+									<h2>Edit Grade Format</h2>				
+									
+								</header>
+
+								<!-- widget div-->
+								<div>
+									
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										
+										
+									</div>
+									<!-- end widget edit box -->
+									
+									<!-- widget content -->
+									<div class="widget-body">
+										<?php $form = $this->formgradeformat;
+				 $form->setAttribute('action', $this->url('grade',array('action'=> 'editgradeformat','controller' => 'grade','id' => $this->id)));
+        		 $form->setAttribute('class', 'smart-form');
+				 $form->prepare(); ?>
+				<?php echo $this->form()->openTag($form);?>
+				<?php  $grade=$form->get('gradesystem');?>
+							<fieldset>
+										<div class="row"> 
+				                        	<section class="col col-4">
+				                        		 <label class="input">
+				                            <?php echo $this->formInput($grade->get('name')); ?>
+				                           </label>  <?php echo $this->formElementErrors($grade->get('name')); ?>
+				                        	</section>
+
+				                       		 <section class="col col-5">
+				                       		 	 <label class="input">
+				                        	<?php echo $this->formElementErrors($grade->get('description')); ?>
+				                        	<?php echo $this->formInput($grade->get('description')); ?> </label>   
+				                        	</section>
+				                        </div>
+				                         <div class="row"> 
+				                        <section class="col col-12">				        				                        	
+				                        	<?php echo $this->formElementErrors($grade->get('gradeSystems')); ?>
+				                        	<?php echo $this->formCollection($grade->get('gradeSystems')); ?> 
+				                       </section>
+				                  		 </div>
+
+				                        	<section class="col col-3">  
+				                        	<?php echo $this->formRow($form->get('submit')); ?>           
+                        					</section>
+				                        	 <?php echo $this->form()->closeTag(); ?>
+				                        </div>
+				            </fieldset>
+									</div>
+									<!-- end widget content -->	
+								</div>
+								<!-- end widget div -->
+								
+							</div>
+							<!-- end widget -->
+</article>
+<script type="text/javascript">
+     function add_field() {
+         var currentCount = $('form fieldset fieldset').length;
+         var template = $('form fieldset > span').data('template');
+         template = template.replace(/__index__/g, currentCount);
+         $('form fieldset').last().append(template);
+ 
+         return false;
+     }
+    function remove_field(e)
+{
+    $(e).parent().remove();
+    return false;
+}
+
+ </script>
+
+	
+
+
+ 

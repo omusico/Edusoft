@@ -1,0 +1,15 @@
+<?php
+ $this->headLink()->appendStylesheet('/jqGrid/css/ui.jqgrid.css')
+                     ->appendStylesheet('/css/jquery.ui.datepicker.css')
+                     ->appendStylesheet('/plugins/ui.multiselect.css') ;
+
+
+
+             $this->headScript()->prependFile('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js', 'text/javascript')
+                    ->prependFile('http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js', 'text/javascript')
+                    ->appendFile('/jqGrid/js/i18n/grid.locale-en.js', 'text/javascript')
+                    ->appendFile('/jqGrid/plugins/ui.multiselect.js', 'text/javascript')
+                    ->appendFile('/jqGrid/js/jquery.jqGrid.min.js', 'text/javascript') ;
+                    ?>
+
+                   

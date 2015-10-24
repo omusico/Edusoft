@@ -1,0 +1,272 @@
+ <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="jarviswidget" id="wid-id-0">
+
+        <header>
+            <h2>Grade Input</h2>
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <form  class="smart-form"  action="/result/input" method="post">
+                                
+                                         <section class="col col-sm-3"><label class="select"><i></i>
+                                         <select class="select2" id="sectionx" name="sectionx" required="required">
+                                            <option value="">select section</option>
+                                                <?php if($sections): ?>
+                                                         <?php foreach($sections as $section): ?>
+                                                            <option value="<?php echo $section['id']; ?>"><?php echo $section['name']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                        </section>
+                                        <section class="col col-sm-3"><label class="select"><i></i>
+                                         <select class="select2" id="classx" name="classx" required="required">
+                                            <option value="">select class</option>
+                                               
+                                             </select> </label>
+                                         </section>
+                                         <section class="col col-sm-3"><label class="select"><i></i>
+                                            <select class="select2" id="subjectx" name="subjectx" required="required">
+                                            <option value="">select subject</option>
+                                                <?php if($subjects): ?>
+                                                         <?php foreach($subjects as $subject): ?>
+                                                            <option value="<?php echo $subject['id']; ?>"><?php echo $subject['code']; ?></option>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>
+                                             </select> </label>
+                                         </section>
+                                         <section class="col col-sm-1">                       
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-cloud-download"></i> Load</button>
+                                        </section>
+                                         </form> 
+                                         <section class="col col-sm-1 text-right">                       
+                                            <button onclick="document.getElementById('formgrades').submit();" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-floppy-saved"></i> Save Grade</button>
+                                        </section>
+                               
+                                   
+                                </div>
+                                </div>
+
+                </div> 
+
+
+<form id="formgrades" action="/result/grades" method="post" class="smart-form">
+
+<table id="gradet" class="table table-bordered hideFullColumn">
+                                                    <thead> 
+                            <tr>
+                                <th class="hidecol">Id</th>
+                                <th class="hidecol">Subject</th>
+                                 <th class="hidecol">Section</th>
+                                  <th class="hidecol">Class</th>
+                                <th>Photo</th>
+                                <th>Admission No</th>
+                                <th>Name</th>
+                                <th>1st Test (20%)</th>
+                                <th>2nd Test (20%) </th>
+                                <th>Exam (70%) </th>
+                            </tr>
+                        </thead>
+                        <tbody><?php if($sessions):?>
+                           
+                    <?php foreach ($sessions as $session) : ?>
+                            <tr>
+                            <td class="hidecol" ><label class="input"><input type="text" name="id[]" value="<?php if($session['s_id']){echo $session['s_id'];};?>"></label></td>
+              
+
+<td class="hidecol"><label class="input"><input type="text" name="subject[]" value="<?php if($subs): ?><?php foreach($subs as $sub): echo $sub['id'];endforeach; ?><?php endif;?>"></label></td>
+
+ <td class="hidecol" ><label class="input"><input type="text" name="section[]" value="<?php if($sects): ?>
+                                                         <?php foreach($sects as $sect): ?>
+                                                           <?php echo $sect['id']; ?>
+                                                        <?php endforeach; ?>
+                                                     <?php endif; ?>"></label></td>
+
+<td class="hidecol" ><label class="input"><input type="text" name="class[]" value="<?php if($session['c_id']){echo $session['c_id'];};?>"></label></td>
+
+                           
+   <td style="width:10%;"><img src="<?php echo $this->basePath?>/data/uploads/students/<?php if($session['s_image']) {echo $session['s_image'];};?>" alt="student pic" style="max-width:30px; border:2px solid #FFF;"></td>
+                             <td style="width:15%;"><?php if($session['s_admNo']){echo $session['s_admNo'];};?></td>
+                            <td><?php if($session['p_fname'] && $session['p_lname'] && $session['p_mname']){echo $session['p_fname'] .' ' .$session['p_lname'] . ' ' .$session['p_mname'] ;};?></td>
+                            
+ <td style="width:15%;" ><label class="input"><input type="text" name="ftest[]" value="<?php if($session['r_firstTest']){echo $session['r_firstTest'];};?>"></label></td>
+ <td style="width:15%;"><label class="input"><input type="text" name="stest[]" value="<?php if($session['r_secondTest']){echo $session['r_secondTest'];};?>"></label></td>
+  <td style="width:15%;" ><label class="input"><input type="text" name="exam[]" value="<?php if($session['r_exam']){echo $session['r_exam'];};?>"></label></td>
+  
+     
+                            </tr> 
+                            </tbody>
+                        <?php endforeach; ?> 
+                                               <?php endif;?>     
+                                                
+                                                </tbody>
+                                            </table>
+                                        
+                                       
+</form>
+
+
+
+
+
+
+
+
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
+</article>
+
+<div class="modal fade" id="items" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:900px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+                <script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+
+          $("#sectionx").change(function(){
+    var state = $("#sectionx").val();
+    var myData = {state: state};
+    //The post using ajax
+      $.ajax({
+              type:"POST",
+              url:"/result/class",
+              data:myData,
+              success: function(data){
+                                 
+                             var st=""
+             for(i in data){
+                st+="<option id='"+data[i].id+"'>"+data[i].name+"</option>"
+              }
+               $("#classx").html(st);
+
+              },
+         
+             });
+  });
+
+
+         $("#classx").change(function(){
+    var state = $("#classx").val();
+    var myData = {state: state};
+    //The post using ajax
+      $.ajax({
+              type:"POST",
+              url:"/result/student",
+              data:myData,
+              success: function(data){
+                                 
+                             var st=""
+             for(i in data){
+                st+="<option id='"+data[i].id+"'>"+data[i].admNo+"</option>"
+              }
+               $("#studentx").html(st);
+
+              },
+         
+             });
+  });
+
+    };
+    
+    //loadScript("js/edusoft.js", pagefunction);
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>

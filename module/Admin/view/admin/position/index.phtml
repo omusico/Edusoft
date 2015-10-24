@@ -1,0 +1,171 @@
+ <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="jarviswidget" id="wid-id-9004">
+
+        <header>
+            <h2>School Positions</h2>
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  
+                                         <a data-toggle="modal" data-target="#edit" href="<?php echo $this->url('position',array('controller' => 'position','action'=>'add'));?>" class="btn btn-primary">
+                                                        <i class="fa fa-plus"></i> <span class="hidden-mobile">New Position</span>
+                                                    </a>
+                                 
+                                     
+                                </div>
+                                </div>
+
+                </div> 
+
+
+
+    <table id="position-table" data-show-export="true" data-pagination="true" data-click-to-select="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered ">
+                        <thead> 
+                            <tr>
+                                <th>Position name</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if($positions):?>         
+                    <?php foreach ($positions as $position) : ?>
+                            <tr> 
+        <td><?php echo $position->getName();?></td>
+        <td><?php echo $position->getDescription();?></td>
+          <td><?php echo $position->getCategory();?></td>
+        <td>
+<a data-toggle="modal" data-target="#edit" href="<?php echo $this->url('position',array('controller' => 'position','action'=>'edit', 'id'=> $position->getId()));?>"><button type="button" class="btn btn-xs btn-info"><i class="fa fa-pencil-o"></i> edit</button></a>
+
+<a  href="<?php echo $this->url('position',array('controller' => 'position','action'=>'delete', 'id'=> $position->getId()));?>"><button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> delete</button></a>
+        </td>
+                            </tr> 
+                           <?php endforeach; ?><?php endif;?>
+                        </tbody>
+                    </table>
+                                        
+
+
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
+</article>
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:600px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+                <script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+         $('#position-table').bootstrapTable({
+
+            });
+          
+
+    };
+    loadScript("/bot/bootstrap-table.js", pagefunction);
+    //loadScript("js/edusoft.js", pagefunction);
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>
