@@ -34,7 +34,8 @@
         "phpoffice/phpexcel": "^1.8",
         "dino/dompdf-module": "dev-master",
         "mvlabs/mvlabs-snappy": "dev-master",
-        "google/wkhtmltopdf-amd64": "0.11.0-RC1"
+        "google/wkhtmltopdf-amd64": "0.11.0-RC1",
+        "zfcampus/zf-apigility": "~1.0"
     },
 
 

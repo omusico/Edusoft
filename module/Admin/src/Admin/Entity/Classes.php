@@ -1,6 +1,6 @@
 <?php
 /**
- * Cloud Base Educational Management System
+ * Cloud Base School Management System
  *
  * @author Isaac Bitrus 
  * @copyright Copyright (c) 2015 Edusoft (http://www.edusoft.com.ng)
@@ -10,7 +10,7 @@ namespace Admin\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
 *@ORM\Table(name="class")
-*@ORM\Entity
+* @ORM\Entity(repositoryClass="Admin\Repository\ClassesRepository")
 */
 class Classes
 {
@@ -39,17 +39,133 @@ class Classes
 
     /**
     *@var integer $initial
-    *@ORM\ManyToOne(targetEntity="Initial", fetch="EAGER")
+   * @ORM\Column(name="name", type="integer", length=100, nullable=false)
     **/
     private $initial;
 
     /**
     *@var integer $arm
-    *@ORM\ManyToOne(targetEntity="Arms", fetch="EAGER")
+   * @ORM\Column(name="arm", type="string", length=100, nullable=false)
     **/
     private $arm;
 
+
+    /**
+    * Get id
+    *
+    * @return integer
+    */
+    public function getId()
+    {
+         return $this->id;
+    }
     
+     /**
+     * Set id.
+     *
+     * @param int $id
+     * @return ClassesInterface
+     */
+    public function setId($id)
+    {
+        $this->id =(int) $id;
+
+        return $this;
+    }
+    
+     /**
+     * Set name
+     *
+     * @param string $name
+     * @return name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+   
+    /**
+     * Set section
+    *
+    * @param string $session
+    * @return ClassesInterface
+    */
+    public function setSection($section)
+    {
+        $this->section = $section;
+
+        return $this;
+    }
+
+    /**
+    *@return Section
+    **/
+    public function getSection()
+    {
+        return $this->section;
+    }
+
+    /**
+     * Set Initial
+    *
+    * @param integer $initial
+    * @return ClassesInterface
+    */
+    public function setInitial($initial)
+    {
+        $this->initial = $initial;
+
+        return $this;
+    }
+
+    /**
+    *@return Integer
+    **/
+    public function getInitial()
+    {
+
+        return $this->initial;
+    }
+
+
+    /**
+     * Set section
+    *
+    * @param string $arm
+    * @return ClassesInterface
+    */
+    public function setArm($arm)
+    {
+        $this->arm = $arm;
+
+        return $this;
+    }
+
+    /**
+    *@return string
+    **/
+    public function getArm()
+    {
+       return $this->arm;
+    }
+   
+
+    
+
+
+
      /**
      * Set name
      *

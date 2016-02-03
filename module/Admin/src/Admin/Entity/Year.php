@@ -1,11 +1,18 @@
 <?php
+/**
+ * Edusoft Cloud Base School Management System
+ *
+ * @author Isaac Bitrus 
+ * @copyright Copyright (c) 2015 Edusoft (http://www.edusoft.com.ng)
+ */
+
 namespace Admin\Entity;
 use Doctrine\ORM\Mapping as ORM;
+
 /**
-*@ORM\Table(name="year")
-*@ORM\Entity
+*@ORM\Entity(repositoryClass="Admin\Repository\YearRepository")
 */
-class year
+class Year implements YearInterface
 {
 	/**
 		* @var integer
@@ -33,22 +40,25 @@ class year
     {
         return $this->id;
     }
-    /**
-     * Set id
-     *@param int $id
-     * @return year
+
+        /**
+     * Set id.
+     *
+     * @param int $id
+     * @return YearInterface
      */
     public function setId($id)
     {
-        $this->id=$id;
+        $this->id = (int) $id;
         return $this;
     }
+
 
     /**
      * Set sessionName
      *
      * @param string $name
-     * @return year
+     * @return YearInterface
      */
     public function setName($name)
     {
@@ -78,12 +88,7 @@ class year
     {
         return get_object_vars($this);
     }
-public function exchangeArray ($data = array()) 
-    {
-        //$this->id = $data['id'];
-        $this->name = $data['name'];
-        
-    }
+
 
    
 }

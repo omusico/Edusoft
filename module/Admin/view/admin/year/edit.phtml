@@ -1,0 +1,138 @@
+	<article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			
+
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-0">
+								<!-- widget options:
+									usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+									data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="true" 
+									data-widget-sortable="false"
+									
+								-->
+								<header>
+									<h2>Edit  Year</h2>				
+									
+								</header>
+
+								<!-- widget div-->
+								<div>
+									
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										
+										
+									</div>
+									<!-- end widget edit box -->
+									
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+									<?php $form = $this->form;
+				$form->setAttribute('action', $this->url('year',array('action'=> 'edit','controller' => 'year', 'id'=>$this->id)));
+
+             $form->setAttribute('class', 'smart-form');
+             $form->setAttribute('role', 'form');
+				$form->prepare(); ?>
+				<?php echo $this->form()->openTag($form); ?>
+
+				<fieldset>
+				          	<div clas="row"> 
+									<section class="col col-12">
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($form->get('name')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($form->get('name')); ?>
+									</section>
+							</div>
+					</fieldset>							
+												
+				
+							<footer>
+								<?php echo $this->formRow($form->get('submit')); ?>
+							</footer>
+							<?php echo $this->form()->closeTag(); ?>
+				
+									</div>
+									<!-- end widget content -->
+									
+								</div>
+								<!-- end widget div -->
+								
+							</div>
+							<!-- end widget -->
+</article>
+
+
+
+ <script>
+$(function() {
+$( "#datepicker" ).datepicker();
+			
+			$('#startdate').datepicker({
+				dateFormat : 'dd/mm/yy',
+				changeMonth: true,
+				changeYear: true,
+				prevText : '<i class="fa fa-chevron-left"></i>',
+				nextText : '<i class="fa fa-chevron-right"></i>',
+				onSelect : function(selectedDate) {
+					$('#enddate').datepicker('option', 'minDate', selectedDate);
+				}
+			});
+			
+			$('#enddate').datepicker({
+				dateFormat : 'dd/mm/yy',
+				changeMonth: true,
+				changeYear: true,
+				prevText : '<i class="fa fa-chevron-left"></i>',
+				nextText : '<i class="fa fa-chevron-right"></i>',
+				onSelect : function(selectedDate) {
+					$('#startdate').datepicker('option', 'maxDate', selectedDate);
+				}
+			});
+
+
+
+				// Validation
+				// Validation
+				$("#year").validate({
+
+					// Rules for form validation
+					rules : {
+						name: {
+							required : true
+						},
+						status : {
+							required : true
+							
+						},
+						
+					},
+
+					// Messages for form validation
+					messages : {
+						name : {
+							required : 'Please input a year'
+						},
+						status: {
+							required : 'Please set status'
+						},
+					},
+
+					// Do not change code below
+					errorPlacement : function(error, element) {
+						error.insertAfter(element.parent());
+					},
+
+				});
+
+
+
+});
+</script>

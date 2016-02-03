@@ -28,7 +28,7 @@ return array(
                     'host' => 'localhost',
                     'port' => '3306',
                     'user' => 'root',
-                    'dbname' => 'brainportal',
+                    'dbname' => 'edumatic',
                     'charset' => 'UTF8',
                     'driverOptions' => array(
                         'charset' => 'UTF8'

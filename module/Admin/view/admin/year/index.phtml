@@ -1,201 +1,79 @@
- <div style="padding:auto;">
-<article class="col-md-9" style="margin:auto;">
-		<!-- Widget ID (each widget will need unique ID)-->
-	<div class="jarviswidget jarviswidget" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false">
-			<header style="background:#274A80; color:#fff;">
-				<span class="widget-icon"> <i class="fa fa-table"></i> </span>
-					<h2><strong>SESSION AND TERM MANAGEMENT </strong></h2>
-			</header>
-					<!-- widget div-->
-					<div>
-						<!-- widget edit box -->
-							<div class="jarviswidget-editbox">
-									<!-- This area used as dropdown edit box -->
-							</div>
-									<!-- end widget edit box -->
-									<!-- widget content -->
-	<div class="widget-body">
-		<ul id="myTab1" class="nav nav-tabs bordered">
-			<li class="active"><a href="#s1" data-toggle="tab">SESSION</a></li>
-			<li><a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> TERM</a>	</li>					
-		</ul>
-			<div id="myTabContent1" class="tab-content padding-10">
-				
-			<div class="tab-pane fade in active" id="s1">
-					                   
-                    <div class="row alert alert-info no-margin fade in">    
-                         <?php $form = $this->form;
-				$form->setAttribute('action', $this->url('year',array('action'=> 'addyear','controller' => 'year')));
-                         $form->setAttribute('role', 'form-horizontal');
-                         $form->setAttribute('class', 'form-inline');
-                         $form->setAttribute('id', 'classes');
-                        $form->prepare(); ?>
-                        <?php echo $this->form()->openTag($form); ?>
-                
-                                       
-                       <div class="rows"> 
-                                            
-                                             
-                                            <?php echo $this->formElementErrors($form->get('name')); ?>
-                                            <?php echo $this->formInput($form->get('name')); ?>    
-                                            
+ <article class="col-xs-12 col-sm-10 col-md-7 col-lg-7">
+
+    <div class="jarviswidget" id="wid-id-9004">
+
+        <header>
+            <h2>School Year</h2>
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+                  
+                                          <a data-toggle="modal" data-target="#edit" href="<?php echo $this->url('year',array('controller' => 'year','action'=>'add'));?>" class="btn btn-primary">
+                                                        <i class="fa fa-plus"></i> <span class="hidden-mobile">Add New Year</span>
+                                                    </a>
+                                 
+                                     
+                                </div>
+                                </div>
+
+                </div> 
 
 
-                                            
-                                            <?php echo $this->formRow($form->get('submit')); ?>           
-                                      
-                                             <?php echo $this->form()->closeTag(); ?>
-                                        </div>
-                             
-                    </div>
-                
-               
 
-					<!-- Add session block starts here -->
-				
-				<!-- Add session block ends here -->
-					<!-- Session list starts here -->
-					<div class="row">
-					<div class="custom-scroll table-responsive col-md-12" style="height:194px; overflow-y:scroll;">
-					<table id="" class="table table-bordered table-hover" width="100%" style="margin-top:5px;">
-						<thead> 
-							<tr>
-								<th>Year Name</th>
-								<th>Action </th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($years as $year) : ?>
-							<tr>
-						    <td><?php echo $this->escapeHtml($year->getName());?></td>
-						    <td>
- <a data-toggle="modal"  data-target="#year" href="<?php echo $this->url('year',array('controller' => 'year','action'=>'edityear', 'id' => $year->getid()));?>"><button class="btn btn-xs btn-default"><i class='fa fa-pencil'></i></button></a>
+    <table id="vehicletable" data-show-export="true" data-pagination="true" data-click-to-select="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered">
+                        <thead> 
+                            <tr>
+                                <th>Year Name</th>
+                                <th>Action</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if($years):?>         
+                    <?php foreach ($years as $year) : ?>
+                            <tr> 
+        
+        <td><?php echo $this->escapeHtml($year->getName());?></td>
+        
+        <td>
+<a data-toggle="modal" data-target="#edit" href="<?php echo $this->url('year',array('controller' => 'year','action'=>'edit', 'id'=>$year->getId()));?>"><button type="button" class="btn btn-xs btn-info "><i class="fa fa-pencil"></i> edit</button></a>
 
-<a id="conf" href="<?php echo $this->url('year',array('controller' => 'year','action'=>'delete', 'id' => $year->getid()));?>"><button class="btn btn-xs btn-default"><i class='fa fa-times'></i></button></a>
-							</td>
-							</tr>
-							</tbody>
-						<?php endforeach; ?>
-					</table>
-					</div>		
-					</div>
-					<!-- Session list ends here-->			
-				</div>
-				
-		<div class="tab-pane fade" id="s2">
-			
+<a  href="<?php echo $this->url('year',array('controller' => 'year','action'=>'delete', 'id'=>$year->getId()));?>"><button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> delete</button></a>
+        </td>
+                            </tr> 
+                           <?php endforeach; ?><?php endif;?>
+                        </tbody>
+                    </table>
+                                        
 
 
-			<div class="row alert alert-info no-margin fade in">    
-              <?php $formterm = $this->formterm;
-				$formterm->setAttribute('action', $this->url('year',array('action'=> 'addterm','controller' => 'year')));
-                         $formterm->setAttribute('role', 'form-horizontal');
-                         $formterm->setAttribute('class', 'form-inline');
-                         $formterm->setAttribute('id', 'classes');
-                        $formterm->prepare(); ?>
-                        <?php echo $this->form()->openTag($formterm); ?>
-                
-                                       
-                       <div class="rows"> 
-                                            
-                                             
-                                            <?php echo $this->formElementErrors($formterm->get('name')); ?>
-                                            <?php echo $this->formInput($formterm->get('name')); ?>    
-                                            
-                                            
-                                            <?php echo $this->formRow($form->get('submit')); ?>           
-                                      
-                                             <?php echo $this->form()->closeTag(); ?>
-                                        </div>
-                             
-                    </div>
-
-
-		
-			<div class="row">
-				<div class="col-md-12">
-					<div class="custom-scroll table-responsive" style="height:194px; overflow-y:scroll;">
-				<table id="" class="table table-bordered table-hover" width="100%" style="margin-top:5px;">
-					<thead> 
-						<tr>
-						    <th>Term Name</th>
-						    <th>Action</th>
-						</tr>
-					</thead>
-				<tbody>
-					<?php foreach ($terms as $term) : ?>
-						<tr>
-				    <td><?php echo $this->escapeHtml($term->getName());?></td>
-				    <td>
-<a  href="<?php echo $this->url('year',array('controller' => 'year','action'=>'editterm', 'id' => $term->getId()));?>"><button class="btn btn-xs btn-default"><i class='fa fa-pencil'></i></button></a>
-
-<a id="connf" href="<?php echo $this->url('year',array('controller' => 'year','action'=>'deleteterm', 'id' => $term->getId()));?>"onclick="confirmdelete()"><button class="btn btn-xs btn-default"><i class='fa fa-times'></i></button></a>
-					</td>													     
-						</tr>
-				</tbody>
-			<?php endforeach; ?>
-				</table>
-			</div>
-			</div>		
-			</div>
-			</div>
-			
-				
-											
-										</div>
-				
-									</div>
-									<!-- end widget content -->
-									
-								</div>
-								<!-- end widget div -->
-				
-							</div>
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
 </article>
-<!-- MODAL FOR EDITING ACADEMIC SESSION -->
-<div class="modal fade" id="year" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									&times;
-				</button>
-				<h4 class="modal-title" id="myModalLabel">Academic session</h4>
-			</div>
-				<div class="modal-body">
-				
-		      <?php $form = $this->form;
-				$form->setAttribute('action', $this->url('year',array('action'=> 'edityear','controller' => 'year', 'id'=>$this->id)));
-				$form->prepare(); ?>
-				<?php echo $this->form()->openTag($form); ?>
-					<div class="row">
-						<section class="col col-6">
-							<label class="label">Year Name</label>
-							<label class="input">
-			<?php echo $this->formInput($form->get('name')); ?>
-							<i></i></label>
-						</section>
-					</div>
-												  									  				
-			   </div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">
-									Cancel
-			</button>
-			<?php echo $this->formRow($form->get('submit')); ?>
-								<?php echo $this->form()->closeTag(); ?>
-			</div>
-						</div><!-- /.modal-content -->
-					</div><!-- /.modal-dialog -->
-				</div><!-- /.modal -->
-<!-- END OF MODAL FOR EDITING ACADEMIC SESSION-->
 
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:900px;">
+            
+           
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
 
-
-	</div>													
-
-
-<script>
+                <script>
   /* DO NOT REMOVE : GLOBAL FUNCTIONS!
      *
      * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
@@ -254,9 +132,15 @@
     // pagefunction
     
     var pagefunction = function() {
-        // clears the variable if left blank
+         $('#vehicletable').bootstrapTable({
+
+            });
     };
+     loadScript("/bot/bootstrap-table.js", pagefunction);
+
+
     
+    //loadScript("js/edusoft.js", pagefunction);
     // end pagefunction
 
     // destroy generated instances 

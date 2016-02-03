@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Admin\Entity\Repository\StateRepository")
  * @ORM\Entity
  */
-class State
+class State implements StateInterface
 {
     /**
      * @var integer
@@ -39,7 +39,18 @@ class State
    
     
 
-   
+          /**
+     * Set id.
+     *
+     * @param int $id
+     * @return StateInterface
+     */
+    public function setId($id)
+    {
+        $this->id = (int) $id;
+        return $this;
+    }
+
     /**
      * Get id
      *
@@ -54,7 +65,7 @@ class State
      * Set name
      *
      * @param string $name
-     * @return State
+     * @return StateInterface
      */
     public function setName($name)
     {
@@ -77,7 +88,7 @@ class State
      * Set code
      *
      * @param string $code
-     * @return State
+     * @return StateInterface
      */
     public function setCode($code)
     {

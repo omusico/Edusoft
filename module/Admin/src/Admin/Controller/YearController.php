@@ -1,274 +1,207 @@
 <?php
+/**
+ * Cloud Base School Management System
+ *
+ * @author Isaac Bitrus 
+ * @copyright Copyright (c) 2015 Edusoft (http://www.edusoft.com.ng)
+ */
+
+
 namespace Admin\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
+use Admin\Entity\YearInterface;
+use Admin\Form\YearForm;
+use Admin\Service\YearServiceInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use Admin\Entity\Year; 
-use Admin\Form\YearForm;       
-use Admin\Form\YearFilter;
-
-use Admin\Entity\Term; 
-use Admin\Form\TermForm;       
-use Admin\Form\TermFilter;
-
-use Admin\Entity\Session; 
-use Admin\Form\SessionForm;       
-use Admin\Form\SessionFilter;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
-
- 
 class YearController extends AbstractActionController
 {
-    protected $em;
-   
-    public function getEntityManager()
+      /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     *
+     * @var YearServiceInterface
+     */
+    private $yearService;
+
+
+    public function indexAction()
     {
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        }
-        return $this->em;
+        $viewModel = new ViewModel();
+        $years = $this->getYearService()->getYearRepository()->findAll();
+
+       
+        $viewModel->setVariables(array(
+            'years' => $years,
+        ));
+        return $viewModel;
     }
 
-   public function indexAction()
-   {    
-       
-         //list of sessions
-          
-           $entityManager = $this->getEntityManager();
-           $formterm = new TermForm($entityManager);
-           $formacademicsession = new SessionForm($entityManager);
-           $form = new YearForm();
-
-
-                     
-           // return $this->redirect()->toRoute('admin/default', array('controller'=>'session', 'action'=>'index'));
-         
-
-         $em = $this->getEntityManager();
-          $terms=$em->getRepository('Admin\Entity\Term')->findAll();
-          $years=$em->getRepository('Admin\Entity\Year')->findAll();
-         // $academicsession=$em->getRepository('Admin\Entity\Academicsession')->findAll();
-     
-    
+    public function yearsAction() {
+       $years = $this->getYearService()->getYearRepository()->years();
 
        
-           return new ViewModel(array (
-            'years' => $years,
-            'terms'=>$terms,
-            //'academicsession' => $academicsession,
-            'form' =>$form,
-            'formterm'=>$formterm,
-            //'formacademicsession' =>$formacademicsession,
-            ));
+        return new JsonModel(array(
+            'data' => $years)
+        );
+    }
 
-      }
+    public function addAction()
+    {   $viewModel = new ViewModel();
+        $form = new YearForm($this->getEntityManager());
 
-    public function addyearAction()
-    {
-
-
-    $entityManager = $this->getEntityManager();
-     $form = new YearForm();
-     $form->setHydrator (new DoctrineEntity($entityManager,'Admin\Entity\Year'));
-     $year = new year();
-
-     $form->bind($year);      
-      
         $request = $this->getRequest();
-         if ($request->isPost()) {
-            $form->setInputFilter(new YearFilter($this->getServiceLocator()));
+        if ($request->isPost()) {
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $entityManager->persist($year);
-                $entityManager->flush();
+                /* @var $year Year */
+                $year = $form->getData();
 
-                // Redirect to list of albums
+                if ($this->getYearService()->addYear($year)) {
+                    $this->FlashMessenger()->addSuccessMessage('New year has been successfully added', 'Edusoft');
+                } else {
+                    $this->FlashMessenger()->addErrorMessage('Error occurred while adding new year', 'Edusoft');
+                }
+
+                // Redirect to list of companies
                 return $this->redirect()->toRoute('year', array('controller'=>'year', 'action'=>'index'));
             }
         }
-        return new ViewModel(
-            array('form' => $form)
-        );
-        
+
+        $viewModel->setVariables(array(
+            'form' => $form,
+        ));
+
+        return $viewModel;
     }
 
-    public function addtermAction()
-    { 
-      $objectManager = $this->getEntityManager();
-        
-        $formterm = new TermForm($objectManager);
-        $term = new Term();
-        $formterm->bind($term);
-        
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-          $formterm->setInputFilter(new TermFilter($this->getServiceLocator()));
-         $formterm->setData($request->getPost());
-        
-         if ($formterm->isValid()) {
-            $objectManager->persist($term);
-            $objectManager->flush();
-            //
-            return $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index'));
-         }
-        }
-        return new ViewModel(
-            array('formterm' => $formterm)
-        );
-        
-    }
-
-     public function deletetermAction()
-   {$id = $this->params()->fromRoute('id');
-    if (!$id) return $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index'));
-    
-    $entityManager = $this->getEntityManager();
-    
-        try {
-      $repository = $entityManager->getRepository('Admin\Entity\Term');
-      $term = $repository->find($id);
-      $entityManager->remove($term);
-      $entityManager->flush();
-      $this->flashMessenger()->addSuccessMessage('Term Delete Successfully!');
-    //   $this->flashMessenger()->addSuccessMessage('Post Saved');
-        }
-        catch (\Exception $ex) {
-      $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index'));  
-        }
-    
-    return $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index')); 
-   }
-
-       public function deleteAction()
-   {$id = $this->params()->fromRoute('id');
-    if (!$id) return $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index'));
-    
-    $entityManager = $this->getEntityManager();
-    
-        try {
-      $repository = $entityManager->getRepository('Admin\Entity\Year');
-      $year = $repository->find($id);
-      $entityManager->remove($year);
-      $entityManager->flush();
-      $this->flashMessenger()->addSuccessMessage('Year Delete Successfully!');
-    //   $this->flashMessenger()->addSuccessMessage('Post Saved');
-        }
-        catch (\Exception $ex) {
-      $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index'));  
-        }
-    
-    return $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index')); 
-   }
-
-     public function edityearAction()
-    { 
-
-       $entityManager = $this->getEntityManager();
-       $viewmodel = new ViewModel();
+        /**
+     * Handles year editing
+     *
+     * @return ViewModel
+     */
+    public function editAction()
+    {   $viewModel = new ViewModel();
         $id = (int) $this->params()->fromRoute('id', 0);
+
         if (!$id) {
-            return $this->redirect()->toRoute('year', array('controller'=>'year','action' => 'index'));
+            return $this->redirect()->toRoute('year', array('controller'=>'year','action' => 'add'));
         }
 
-        $year = $entityManager->find('Admin\Entity\Year', $id);
+        $year = $this->getYearService()->getYearRepository()->find($id);
+
         if (!$year) {
-             return $this->redirect()->toRoute('year', array('controller'=>'year', 'action'=>'index')); 
-           
+            return $this->redirect()->toRoute('year', array('controller'=>'year','action' => 'add'));
         }
-         $form = new YearForm($entityManager);
-         $form->bind($year);
 
-        
+        $form = new YearForm($this->getEntityManager());
+        /* @var $form YearForm */
+        $form->bind($year);
 
         $request = $this->getRequest();
-         //disable layout if request by Ajax
-        $viewmodel->setTerminal($request->isXmlHttpRequest());
-        
-        $is_xmlhttprequest = 1;
-        if ( ! $request->isXmlHttpRequest()){
-            //if NOT using Ajax
-            $is_xmlhttprequest = 0;
-
         if ($request->isPost()) {
-           // $formacademicsession->setInputFilter(new SessionFilter($this->getServiceLocator()));
             $form->setData($request->getPost());
 
-           if ($form->isValid()) {
-              
-              //  $entityManager->persist($academicsession);
-                $entityManager->flush();
+            if ($form->isValid()) {
+                $year = $form->getData();
 
-                // Redirect to list of albums
-                return $this->redirect()->toRoute('year', array('controller'=>'year', 'action'=>'index')); 
-           }
+                if ($this->getYearService()->addYear($year)) {
+                    $this->FlashMessenger()->addSuccessMessage('Year have been successfully updated');
+                } else {
+                    $this->FlashMessenger()->addErrorMessage('Error occurred while updating year');
+                }
+
+                // Redirect to list of products
+                 return $this->redirect()->toRoute('year', array('controller'=>'year', 'action'=>'index')); 
+            }
         }
 
-       } 
-          $viewmodel->setVariables(array(
-                    'form' => $form,
-                    'id' =>$id,
-                    'is_xmlhttprequest' => $is_xmlhttprequest //need for check this form is in modal dialog or not in view
+        $viewModel->setVariables(array(
+            'form' => $form,
+            'id' => $id,
         ));
-        
-        return $viewmodel;
+
+        return $viewModel;
     }
 
-
-    public function edittermAction()
-    { 
-        $entityManager = $this->getEntityManager();
-       $viewmodel = new ViewModel();
-          $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        public function deleteAction()
+    {  
+        $id = $this->params()->fromRoute('id');
         if (!$id) {
-          return $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index'));
+            return $this->redirect()->toRoute('year', array('controller' => 'year', 'action' => 'index'));
         }
 
-        $term = $entityManager->find('Admin\Entity\Term', $id);
-        if (!$term) {
+
+        $year = $this->getYearService()->getYearRepository()->find($id);
+
+        if ($year) {
+            if ($this->getYearService()->deleteYear($year)) {
+                $this->FlashMessenger()->addSuccessMessage('Year have been successfully deleted');
+            } else {
+                $this->FlashMessenger()->addErrorMessage('Error occurred while deleting year');
+            }
+
+            // Redirect to list of years
              return $this->redirect()->toRoute('year', array('controller'=>'year', 'action'=>'index')); 
-           
         }
-
-
-
-        $formterm = new TermForm($entityManager);
-        $formterm->bind($term);
-
-        $request = $this->getRequest();
-         //disable layout if request by Ajax
-        $viewmodel->setTerminal($request->isXmlHttpRequest());
-        
-        $is_xmlhttprequest = 1;
-        if ( ! $request->isXmlHttpRequest()){
-            //if NOT using Ajax
-            $is_xmlhttprequest = 0;
-
-        if ($request->isPost()) {
-           // $formacademicsession->setInputFilter(new SessionFilter($this->getServiceLocator()));
-            $formterm->setData($request->getPost());
-
-           if ($formterm->isValid()) {
-              
-              //  $entityManager->persist($academicsession);
-                $entityManager->flush();
-
-                // Redirect to list of albums
-                return $this->redirect()->toRoute('year', array('controller'=>'year', 'action'=>'index')); 
-           }
+        else
+        {
+            $this->FlashMessenger()->addErrorMessage('Year not found in the database');
+            // Redirect to list of years
+             return $this->redirect()->toRoute('year', array('controller'=>'year', 'action'=>'index')); 
         }
-
-       } 
-          $viewmodel->setVariables(array(
-                    'formterm' => $formterm,
-                    'id' =>$id,
-                    'is_xmlhttprequest' => $is_xmlhttprequest //need for check this form is in modal dialog or not in view
-        ));
         
-        return $viewmodel;
+
     }
+
+
+
    
+
+    /**
+     * Method used to inject year service.
+     *
+     * @param YearServiceInterface $service
+     */
+    public function setYearService(YearServiceInterface $service)
+    {
+        $this->yearService = $service;
+    }
+
+        /**
+     * Method used to obtain year service.
+     *
+     * @return SemesterService
+     */
+    public function getYearService()
+    {
+        return $this->yearService;
+    }
+
+    /**
+     * Method used to obtain EntityManager.
+     *
+     * @return EntityManager - entity manager object
+     */
+    public function getEntityManager()
+    {
+        return $this->entityManager;
+    }
+
+    /**
+     * Method used to inject EntityManager.
+     *
+     * @param EntityManager $entityManager
+     */
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 }

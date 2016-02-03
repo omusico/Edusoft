@@ -1,0 +1,381 @@
+<article class="col-sm-12 col-md-12 col-lg-12">
+			
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" style="margin-left:10%; margin-right:10%">
+				<!-- widget options:
+					usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+					
+					data-widget-colorbutton="false"	
+					data-widget-editbutton="false"
+					data-widget-togglebutton="false"
+					data-widget-deletebutton="false"
+					data-widget-fullscreenbutton="false"
+					data-widget-custombutton="false"
+					data-widget-collapsed="true" 
+					data-widget-sortable="false"
+					
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-graduation-cap"></i> </span>
+					<h2>Applicant Profile </h2>				
+					
+				</header>
+
+				<!-- widget div-->
+				<div>
+					
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+						
+					</div>
+					<!-- end widget edit box -->
+					
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+						<?php $form = $this->form;
+			 $form->setAttribute('action', $this->url('applicant',array('action'=> 'add','controller' => 'applicant')));
+			// $form->setAttribute('class', 'form-horizontal');
+			// $form->setAttribute('readonly', 'true');
+									
+			//	$form->setAttribute('style', 'pointer-events: none');
+            //$form->setAttribute('class', 'form-inline');
+
+			$form->prepare(); ?>
+			<?php echo $this->form()->openTag($form); ?>
+			<?php $person = $form->get('person');?>
+			<?php $guardian = $form->get('person')->get('guardian');?>
+
+			<div class="panel-group smart-accordion-default" id="accordion-2">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseOne-1"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> Basic Information </a></h4>
+								</div>
+								<div id="collapseOne-1" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<fieldset>
+								<div class="row">
+									<section class="col col-4">
+										<img id="imageupload" src="<?php echo $this->basePath?>/img/<?php echo 'images.png';?>" style="width:140px; height:140px;" alt="me" />
+
+
+											<div class="input input-file">
+										<?php echo $this->formFile($person->get('image')); ?>
+											 <?php echo $this->formElementErrors($person->get('image')); ?>
+										</div>
+										</section>
+
+										<section class="col col-4">
+											<label class="textarea"> <i class="icon-append fa fa-comment"></i>
+											<?php echo $this->formTextarea($person->get('residentialAddress')); ?></label>
+											 <?php echo $this->formElementErrors($person->get('residentialAddress')); ?>
+										</section>
+
+
+								<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($person->get('firstName')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('firstName')); ?>
+									</section>
+
+									
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($person->get('lastName')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('lastName')); ?>
+									</section>
+
+									<section class="col col-4">
+											<label class="textarea"> <i class="icon-append fa fa-comment"></i>
+											<?php echo $this->formTextarea($person->get('permanentAddress')); ?></label>
+											 <?php echo $this->formElementErrors($person->get('permanentAddress')); ?>
+										</section>					
+
+									
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($person->get('middleName')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('middleName')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"> <i class="icon-append fa fa-phone"></i>
+											<?php echo $this->formInput($person->get('mobile')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('mobile')); ?>
+									</section>
+								</div>
+							</fieldset>
+
+							<fieldset>
+								<div class="row">
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($person->get('country')); ?></label>
+											 <?php echo $this->formElementErrors($person->get('country')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($person->get('state')); ?></label>
+											 <?php echo $this->formElementErrors($person->get('state')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($person->get('lga')); ?></label>
+											 <?php echo $this->formElementErrors($person->get('lga')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($person->get('sex')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('sex')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-calendar"></i>
+											<?php echo $this->formDate($person->get('dob')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('dob')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($person->get('religion')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('religion')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($person->get('nokName')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('nokName')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-chain"></i>
+											<?php echo $this->formInput($person->get('nokRel')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('nokRel')); ?>
+									</section>
+
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-mobile"></i>
+											<?php echo $this->formInput($person->get('nokMobile')->setAttribute('data-mask','+99 (999) 999-9999')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($person->get('nokMobile')); ?>
+									</section>
+
+								</div>
+								
+							</fieldset>
+
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-1" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> Guardian Information </a></h4>
+								</div>
+								<div id="collapseTwo-1" class="panel-collapse collapse">
+									<div class="panel-body">
+										<fieldset>
+
+								<div class="row">
+									<section class="col col-4">
+										<label class="select">
+											<?php echo $this->formSelect($guardian->get('gender')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($guardian->get('gender')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($guardian->get('firstName')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($guardian->get('firstName')); ?>
+
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($guardian->get('lastName')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($guardian->get('lastName')); ?>
+									</section>
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-user"></i>
+											<?php echo $this->formInput($guardian->get('middleName')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($guardian->get('middleName')); ?>
+									</section>
+									
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-mobile-phone"></i>
+											<?php echo $this->formInput($guardian->get('mobile1')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($guardian->get('mobile1')); ?>
+									</section>	
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-mobile-phone"></i>
+											<?php echo $this->formInput($guardian->get('mobile2')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($guardian->get('mobile2')); ?>
+									</section>	
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-envelope-o"></i>
+											<?php echo $this->formInput($guardian->get('email')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($guardian->get('email')); ?>
+									</section>	
+
+
+									<section class="col col-4">
+										<label class="input"><i class="icon-append fa fa-briefcase"></i>
+											<?php echo $this->formInput($guardian->get('occupation')); ?>
+										</label>
+										 <?php echo $this->formElementErrors($guardian->get('occupation')); ?>
+									</section>	
+								</div>
+								</fieldset>	
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseThree-1" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> Collapsible Group Item #3 </a></h4>
+								</div>
+								<div id="collapseThree-1" class="panel-collapse collapse">
+									<div class="panel-body">
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+									</div>
+								</div>
+							</div>
+						</div>
+
+			
+						
+							
+											
+
+							<footer>
+								<?php echo $this->formRow($form->get('submit')); ?>
+								
+							</footer>
+						
+							<?php echo $this->form()->closeTag(); ?>
+					</div>
+					<!-- end widget content -->
+					
+				</div>
+				<!-- end widget div -->
+				
+			</div>
+			<!-- end widget -->
+
+
+				
+</article>
+
+ <script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+
+    	
+    };
+    
+   
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+     
+
+</script>

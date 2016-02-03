@@ -1,102 +1,79 @@
 <?php
 namespace Admin;
- 
 
 return array(
-      'controllers' => array(
-        'invokables' => array(
-            'Admin\Controller\Session' => 'Admin\Controller\SessionController',
-            'Admin\Controller\Section' => 'Admin\Controller\SectionController',
-            'Admin\Controller\Year' => 'Admin\Controller\YearController',
-            'Admin\Controller\Subject' => 'Admin\Controller\SubjectController',
-            'Admin\Controller\Class' => 'Admin\Controller\ClassController', 
-            'Admin\Controller\SubjectCategory' => 'Admin\Controller\SubjectCategoryController', 
-            'Admin\Controller\Student' => 'Admin\Controller\StudentController',
-            'Admin\Controller\Staff' => 'Admin\Controller\StaffController',
-            'Admin\Controller\Salary' => 'Admin\Controller\SalaryController',
-            'Admin\Controller\Guardian' => 'Admin\Controller\GuardianController',
-            'Admin\Controller\Formmaster' => 'Admin\Controller\FormmasterController',
-            'Admin\Controller\Fee' => 'Admin\Controller\FeeController',
-            'Admin\Controller\Feecollection' => 'Admin\Controller\FeecollectionController',
-            'Admin\Controller\Result' => 'Admin\Controller\ResultController',
-            'Admin\Controller\Grade' => 'Admin\Controller\GradeController',
-            'Admin\Controller\Trait' => 'Admin\Controller\TraitController',
-            'Admin\Controller\Assessment' => 'Admin\Controller\AssessmentController',
-            'Admin\Controller\Settings' => 'Admin\Controller\SettingsController',
-            'Admin\Controller\Rating' => 'Admin\Controller\RatingController',
-            'Admin\Controller\Attendance' => 'Admin\Controller\AttendanceController', 
-              'Admin\Controller\Admin' => 'Admin\Controller\AdminController', 
-                      
-            
+     'controllers' => array(
+        'factories' => array(
+            'Admin\Controller\Year' => 'Admin\Factory\Controller\YearControllerFactory',
+            'Admin\Controller\AcademicYear' => 'Admin\Factory\Controller\AcademicYearControllerFactory',
+            'Admin\Controller\Term' => 'Admin\Factory\Controller\SemesterControllerFactory',
+            'Admin\Controller\Section' => 'Admin\Factory\Controller\SectionControllerFactory',
+            'Admin\Controller\Subject' => 'Admin\Factory\Controller\SubjectControllerFactory',
+
         ),
-        'factories'=> array(
-            'Admin\Controller\Section' => 'Admin\Factory\SectionControllerFactory', 
-            'Admin\Controller\Position' => 'Admin\Factory\Controller\PositionControllerFactory' 
-            ),
+        'invokables' => array(      
+        ),
     ),
-    'router' => array(
+    'service_manager' => array(
+        'factories' => array(
+            'YearService' => 'Admin\Factory\Service\YearServiceFactory',
+            'AcademicYearService' => 'Admin\Factory\Service\AcademicYearServiceFactory',
+            'TermService' => 'Admin\Factory\Service\TermServiceFactory',
+            'SectionService' => 'Admin\Factory\Service\SectionServiceFactory',
+            'SubjectService' => 'Admin\Factory\Service\SubjectServiceFactory',
+        )
+    ),
+ 'router' => array(
         'routes' => array(
-            'academic' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/academic[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Session',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-            'position' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/position[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Position',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-             'admin' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/admin[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Admin',
-                        'action' => 'dashboard',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-             'year' => array(
+            'year' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route' => '/year[/:action][/:id]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Year',
+                        'controller' => 'year',
                         'action' => 'index',
                     ),
                 ),
                 'may_terminate' => true,
             ),
-          'result' => array(
+            'term' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/result[/:action][/:id]',
+                    'route' => '/term[/:action][/:id]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Result',
+                        'controller' => 'Term',
                         'action' => 'index',
                     ),
                 ),
                 'may_terminate' => true,
             ),
-            'subject' => array(
+           'academic-year' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/academic-year[/:action][/:id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller' => 'AcademicYear',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+            ),
+           'section' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/school[/:action][/:id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller' => 'section',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+            ),
+           'subject' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route' => '/subject[/:action][/:id]',
@@ -108,237 +85,13 @@ return array(
                 ),
                 'may_terminate' => true,
             ),
-            'section' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/section[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Section',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-
-            'classes' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/classes[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Class',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-
-            'subjectcategory' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/subjectcategory[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'SubjectCategory',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-
-          'student' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/student[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Student',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-
-
-          'staff' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/staff[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Staff',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-
-
-          'salary' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/salary[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Salary',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-
-
-          'guardian' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/guardian[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Guardian',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-
-          'club' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/club[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Club',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-         'fee' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/fee[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Fee',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-          'formmaster' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/formmaster[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Formmaster',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-            'collection' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/collection[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Feecollection',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-             'grade' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/grade[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Grade',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-            'trait' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/trait[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Trait',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-         'settings' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/settings[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Settings',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-             'assessment' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/assessment[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Assessment',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-            'rating' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/rating[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Rating',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
-            'attendance' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/attendance[/:action][/:id]',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller' => 'Attendance',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
         ),
-    ),
-    'service_manager'=>array(
-        'invokables'=>array(
-        ),
-        'factories' => array(
-            'picService' => 'Admin\Factory\Service\PicServiceFactory',
-            'Admin\Service\SettingsService'=>'Admin\Factory\Service\SettingsServiceFactory',
-            'Admin\Service\AdminDashboardService'=>'Admin\Factory\Service\AdminDashboardServiceFactory',
-             'Admin\Service\StudentDashboardService'=>'Admin\Factory\Service\StudentDashboardServiceFactory',
-            'Admin\Service\ParentsDashboardService'=>'Admin\Factory\Service\ParentsDashboardServiceFactory',
-            'Admin\Service\StaffDashboardService'=>'Admin\Factory\Service\StaffDashboardServiceFactory',
-         ),
-    ),
-    'view_manager' => array(
+     ),
+
+      'view_manager' => array(
         'template_map' =>array(
-            'adminlayout/layout'=>__DIR__. '/../view/layout/Adminlayout.phtml',
+            'adminlayout/layout'=>__DIR__. '/../view/layout/layout.phtml',
+            'applicantlayout/layout'=>__DIR__. '/../view/layout/applicantlayout.phtml',
             ),
         'template_path_stack' => array(
             'admin' => __DIR__ . '/../view'
@@ -353,9 +106,9 @@ return array(
     'view_helpers' => array(
         'invokables' => array(
             'NotificationsHelper' => 'Admin\View\Helper\NotificationsHelper',
-            'CurrentSessionHelper'=> 'Admin\View\Helper\CurrentSessionHelper',
         )
     ),
+    
      // Doctrine config
     'doctrine' => array(
         'driver' => array(
@@ -371,5 +124,4 @@ return array(
             )
         )
     )
-  
-  );
+);

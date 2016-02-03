@@ -1,0 +1,270 @@
+ <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-16" data-widget-sortable="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+
+        <header>
+            <h2>Student Result View</h2>
+            
+        </header><!-- widget div-->
+
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+
+
+                <div class="widget-body-toolbar">
+                <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <img src="<?php echo $this->basePath?>/img/brn.png" alt="staff pic" style="max-width:100px;"/>
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <p class="text-center font-xl"><strong>BRAINFIELD INTERNATIONAL SCHOOL</strong></p>
+                         <p class="text-center font-xs"><strong>Address:</strong>Along Massallachi Idi Road, Onarikpa, Angwan Waje Shabu, Lafia Nasarawa State.</p>
+                          <p class="text-center font-xs"><strong>Tel:</strong>08024939205, 08039151466.</p>
+                        </div>
+                </div>
+        </div>
+
+      <?php if($students):?><?php foreach ($students as $student):?>
+        <div class="row" style="margin-bottom:5px; padding:5px; ">
+                                   
+                         <div class="col col-sm-2">
+                            <img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo  $student['st_image'];?>" alt="staff pic" style="max-width:85px; border:5px solid #fff;"/>
+                         </div>
+                         <div class="col col-sm-10">
+                            <table class="ptable">
+                                <tbody>
+                                    <tr>
+                                <td style="background">Name:</td>
+                                <td><?php echo $student['p_fname']. ' ' .$student['p_lname']. ' ' .$student['p_mname'];?></td> 
+                                <td>Year:</td>
+                                <td><?php echo $student['y_name'];?></td>                    
+                                    </tr>
+                                    <tr>
+                                <td>Admission No:</td>
+                                <td> <?php echo $student['st_admNo'];?></td>
+                                <td>Term:</td>
+                                <td><?php echo $student['t_name'];?></td>  
+                                    </tr>
+                                    <tr>
+                                <td>Class:</td>
+                                <td><?php echo $student['c_name'];?></td>
+                                <td>No. In Class:</td>
+                                <td><?php echo $ClassNo;?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                         </div>
+            </div>
+
+                                        <?php endforeach;?>
+                                        <?php endif;?>
+                                   
+
+    <div class="row">
+        <div class="col col-sm-12">
+         <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th class="rotation"><span class="rotation">1st Test</span></th>
+                                            <th>2nd Test</th>
+                                            <th>Exam</th>
+                                            <th>Total</th>
+                                            <th>Grade</th>
+                                            <th>Remark</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody><?php if($results):?>
+                                        <?php foreach ($results as $result) : ?>
+                                        <tr>
+                                <td><?php if($result['b_name']){echo $result['b_name'];};?></td>
+                                <td><?php if($result['s_firstTest']){echo $result['s_firstTest'];};?></td>
+                                <td><?php if($result['s_secondTest']){echo $result['s_secondTest'];};?></td>
+                                <td><?php if($result['s_exam']){echo $result['s_exam'];};?></td>
+                                <td><?php if($result['s_total']){echo $result['s_total'];};?></td>
+                                <td><?php if($result['g_grade']){echo $result['g_grade'];};?></td>
+                                <td><?php if($result['g_description']){echo $result['g_description'];};?></td>
+                             
+                                    </tr><?php endforeach; ?>
+                                <?php endif;?>
+                                    </tbody>
+                                </table>
+
+            </div>
+        </div>
+    <div class="row">
+        <div class="col col-sm-9">
+            <div class="row">
+                    <div class="col col-sm-12">
+                            <table class="ptable table-bordered">
+                                <tbody>
+                                    <tr>
+                                <td style="background:#EEE; background-image:-moz-linear-gradient(center top , #F2F2F2 0px, #FAFAFA 100%); color:#333;">Total Score:</td>
+                                <td><strong><?php echo $StudentTotal;?></strong></td> 
+                                <td style="background:#EEE; background-image:-moz-linear-gradient(center top , #F2F2F2 0px, #FAFAFA 100%);  color:#333;"><strong>Class Average:</td>
+                                <td><strong><?php echo $StudentAverage;?></strong></td>                    
+                                    </tr>
+                                    <tr>
+                                <td style="background:#EEE; background-image:-moz-linear-gradient(center top , #F2F2F2 0px, #FAFAFA 100%);  color:#333;"><strong>Highest Score:</td>
+                                <td> <strong><?php echo $HighestScore;?></strong></td>
+                                <td style="background:#EEE; background-image:-moz-linear-gradient(center top , #F2F2F2 0px, #FAFAFA 100%); color:#333;"><strong>Highest Average:</td>
+                                <td><strong><?php echo $HighestAverage;?></strong></td>  
+                                    </tr>
+                                    <tr>
+                                <td style="background:#EEE; background-image:-moz-linear-gradient(center top , #F2F2F2 0px, #FAFAFA 100%);  color:#333;"><strong>Lowest Score:</td>
+                                <td><strong><?php echo $LowestScore;?></strong></td>
+                                <td style="background:#EEE; background-image:-moz-linear-gradient(center top , #F2F2F2 0px, #FAFAFA 100%);  color:#333;"><strong>Lowest Average:</td>
+                                <td><strong><?php echo $LowestAverage;?></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col col-sm-11" style="margin-top:15px; margin-left:13px;  border:solid #EEE;">
+                            <span class="font-md"><strong>Principal's Sign:</strong></span><img src="<?php echo $this->basePath?>/img/sign.jpg" alt="staff pic" style="max-width:150px;"/>
+                         </div>
+                    </div>
+                 </div>
+            <div class="col col-sm-3">
+                 <table class="ptable table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th  style="background:#EEE; background-image:-moz-linear-gradient(center top , #F2F2F2 0px, #FAFAFA 100%);  color:#333;" colspan="3">GRADING KEY</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>                         
+                                        <td>A</td>
+                                        <td>Distinction</td>
+                                        <td>80-100 %</td>                       
+                                    </tr>
+                                     <tr>                         
+                                        <td>B</td>
+                                        <td>Good</td>
+                                        <td>70-79 %</td>                       
+                                    </tr>
+                                    <tr>                         
+                                        <td>C</td>
+                                        <td>Credit</td>
+                                        <td>60-69 %</td>                       
+                                    </tr>
+                                    <tr>                         
+                                        <td>D</td>
+                                        <td>Pass</td>
+                                        <td>50-59 %</td>                       
+                                    </tr>
+                                    <tr>                         
+                                        <td>E</td>
+                                        <td>Fail</td>
+                                        <td>0-49 %</td>                       
+                                    </tr>
+                                    </tbody>
+                                </table>
+                    </div>
+    </div>
+<hr style="border:solid;"></hr>
+
+                
+                                        
+
+
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
+</article>
+                <script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     * TO LOAD A SCRIPT:
+     * var pagefunction = function (){ 
+     *  loadScript(".../plugin.js", run_after_loaded);  
+     * }
+     * 
+     * OR you can load chain scripts by doing
+     * 
+     * loadScript(".../plugin.js", function(){
+     *   loadScript("../plugin.js", function(){
+     *     ...
+     *   })
+     * });
+     */
+    
+    // pagefunction
+    
+    var pagefunction = function() {
+
+    };
+    
+  
+    // end pagefunction
+
+    // destroy generated instances 
+    // pagedestroy is called automatically before loading a new page
+    // only usable in AJAX version!
+
+    var pagedestroy = function(){
+        
+        /*
+        Example below:
+
+        $("#calednar").fullCalendar( 'destroy' );
+        if (debugState){
+            root.console.log("✔ Calendar destroyed");
+        } 
+
+        For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+        */
+    }
+
+    // end destroy
+    
+    // run pagefunction
+    pagefunction();
+
+</script>

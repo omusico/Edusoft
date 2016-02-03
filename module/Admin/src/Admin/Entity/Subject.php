@@ -1,61 +1,53 @@
 <?php
-namespace Admin\Entity;
+/**
+ * Edusoft Cloud Base School Management System
+ *
+ * @author Isaac Bitrus 
+ * @copyright Copyright (c) 2015 Edusoft (http://www.edusoft.com.ng)
+ */
 
+namespace Admin\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="Subject")
- */
-class Subject
+*@ORM\Entity(repositoryClass="Admin\Repository\SubjectRepository")
+*/
+class Subject implements SubjectInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+	/**
+		* @var integer
+		*@ORM\Column(name="id", type="integer", nullable=false)
+		*@ORM\Id
+		*@ORM\GeneratedValue(strategy="IDENTITY")
+		*/
+	protected $id;
 
- 
-    /**
-     * @ORM\Column(type="string")
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
      */
-    protected $name;
+   protected $name;
 
-     /**
-     * @ORM\Column(type="string")
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="short_name", type="string", length=100, nullable=true)
      */
-    protected $code;
+   protected $shortName;
 
-     /**
-     * @ORM\Column(type="string", nullable=true)
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
-    protected $description;
+   protected $description;
 
-     /**
-    *@var integer $category
-    *@ORM\ManyToOne(targetEntity="Admin\Entity\SubjectCategory")
-    *@ORM\JoinColumn(name="category", referencedColumnName="id")
-    **/
-    private $category;
-
-     /**
-     * @ORM\OneToMany(targetEntity="SubjectSectionAssociation", mappedBy="subject",  cascade={"persist", "remove"})
-     */
-    protected $subject_section_associations;
-    
-    
-    protected $inputFilter;
-    
-    
-    public function __construct() {
-        //$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->subject_section_associations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 
     /**
-     * Get the id
+     * Get id
+     *
      * @return int
      */
     public function getId()
@@ -63,16 +55,36 @@ class Subject
         return $this->id;
     }
 
+        /**
+     * Set id.
+     *
+     * @param int $id
+     * @return SubjectInterface
+     */
+    public function setId($id)
+    {
+        $this->id = (int) $id;
+        return $this;
+    }
+
+
     /**
+     * Set sessionName
+     *
      * @param string $name
+     * @return SubjectInterface
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get sessionName
+     *
+     * @return string 
      */
     public function getName()
     {
@@ -80,99 +92,65 @@ class Subject
     }
 
 
-    /**
-     * @param string $code
+     /**
+     * Set shortName
+     *
+     * @param string $shortName
+     * @return SubjectInterface
      */
-    public function setCode($code)
+    public function setShortName($shortName)
     {
-        $this->code = $code;
+        $this->shortName = $shortName;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get shortName
+     *
+     * @return string 
      */
-    public function getCode()
+    public function getShortName()
     {
-        return $this->code;
+        return $this->shortName;
     }
 
+
     /**
+     * Set description
+     *
      * @param string $description
+     * @return SubjectInterface
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get description
+     *
+     * @return string 
      */
     public function getDescription()
     {
         return $this->description;
     }
 
-    /**
-    * Set category
-    *
-    * @param SubjectCategory $category
-    * @return Subject
-    */
-    public function setCategory(SubjectCategory $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-    *@return SubjectCategory
-    **/
-    public function getCategory()
-    {
-        return $this->category;
-    }
 
 
-     /**
-     * Add subject_section_associations
-     *
-     * @param \Admin\Entity\SubjectSectionAssociation $subjectSectionAssociations
-     * @return Subject
-     */
-    public function addSubjectSectionAssociations(\Admin\Entity\SubjectSectionAssociation $link){
-        $this->subject_section_associations->add($link);
-    
-        return $this;
-    }
-    
-    /**
-     * Remove subject_section_associations
-     *
-     * @param \Admin\Entity\SubjectSectionAssociation $subjectSectionAssociations
-     */
-    public function removeSubjectSectionAssociations(\Admin\Entity\SubjectSectionAssociation $link){
-        $this->subject_section_associations->removeElement($link);
-    }
-    
-    /**
-     * Get subject_section_associations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSubjectSectionAssociations()
-    {
-        return $this->subject_section_associations;
-    }
-     /**
+/**
      * Convert the object to an array.
      *
      * @return array
      */
-    public function getArrayCopy()
+    public function getArrayCopy() 
     {
         return get_object_vars($this);
     }
+
+
+   
 }
-
-

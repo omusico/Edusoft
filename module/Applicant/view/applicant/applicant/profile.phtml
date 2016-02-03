@@ -1,0 +1,260 @@
+<article>
+<?php $person=$student->getStudent()->getPerson();
+	  $fullname=$person->getFname(). '  ' .$person->getLname().' '.$person->getMname();
+	  $sex=$person->getSex();
+	  $mobile=$person->getMobile();
+	  $religion=$person->getReligion();
+	  $dob=$person->getDob();
+	  $country=$person->getCountry()->getName();
+	  $state=$person->getState()->getName();
+	  $lga=$person->getLga()->getName();
+	  
+	  $nokname=$person->getNokName();
+	  $nokrel=$person->getNokRel();
+	  $nokmobile=$person->getNokMobile();
+
+
+	 $student=$student->getStudent();
+	 $id=$student->getId();
+	  $admno=$student->getAdmNo();
+	  $profile=$student->getImage();
+	  $class=$student->getCurrentClass()->getName();
+
+	   $parent=$person->getGuardian();
+	   $pfullname=$parent->getFname(). '  ' .$parent->getLname().' '.$parent->getMname();
+	   $pmobile1=$parent->getMobile1();
+	   $pmobile2=$parent->getMobile2();
+	   $occupation=$parent->getOccupation();
+	   $pemail=$parent->getEmail();
+
+	   $admdate=$student->getAdmDate();
+	   $classadmn=$student->getClass()->getName();
+	   $yearadmn=$student->getYear()->getName();
+	   $termadmn=$student->getTerm()->getName();
+	   $sectionsadmn=$student->getSection()->getName();
+
+
+
+
+?>
+<div class="row" >
+				
+					<div class="col-12" >
+				
+				
+							<div class="well well-sm">
+				
+								<div class="row">
+				
+									<div class="col-sm-12 col-md-12 col-lg-12">
+										<div class="well well-light well-sm no-padding" style="margin-left:10%; margin-right:10%">
+				
+											<div class="row" >
+				
+												<div class="col-sm-12 ">
+													<div id="myCarousel" class="carousel fade profile-carousel">
+														<div class="air air-bottom-right padding-10">
+															<a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i> Follow</a>&nbsp; <a href="javascript:void(0);" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i> Connect</a>
+														</div>
+														<div class="air air-top-left padding-10">
+															<h4 class="txt-color-white font-md">Jan 1, 2014</h4>
+														</div>
+														<ol class="carousel-indicators">
+															<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+															<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+															<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+														</ol>
+														<div class="carousel-inner">
+															<!-- Slide 1 -->
+															<div class="item active">
+																<img src="<?php echo $this->basePath('/img/demo/s1.jpg') ?>" alt="demo user">
+															</div>
+															<!-- Slide 2 -->
+															<div class="item">
+																<img src="<?php echo $this->basePath('/img/demo/s2.jpg')?>" alt="demo user">
+															</div>
+															<!-- Slide 3 -->
+															<div class="item">
+																<img src="<?php echo $this->basePath('/img/demo/s3.jpg')?>" alt="demo user">
+															</div>
+														</div>
+													</div>
+												</div>
+				
+												<div class="col-sm-12">
+				
+													<div class="row">
+				
+														<div class="col-sm-3 profile-pic">
+															<img src="<?php echo $this->basePath?>/data/uploads/students/<?php echo $profile;?>" alt="student pic">
+															<div class="padding-10">
+																<div class="font-sm">ADMISSION NO.
+																</div>
+																<div><span class="text-muted"><?php echo $admno;?></span>
+																</div>
+																<div class="font-sm">CURRENT CLASS.
+																</div>
+																<div><span class="text-muted"><?php echo $class;?></span>
+																</div>
+																
+
+															</div>
+														</div>
+											
+														<div class="col-sm-4">
+															<h3>Student Info</h3>
+																	
+											<table class="table table-hover">
+												
+												<tbody>
+													<tr >
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Name:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $fullname;?></td>
+													</tr>
+													<tr >
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Sex:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $sex;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Date of Birth:</span> </td>
+														<td style="padding:3px 0; border:none;"><?php echo $dob;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Religion:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $religion;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">Country:</span> </td>
+														<td style="padding:3px 0; border:none;"><?php echo $country;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">State:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $state;?></td>
+													</tr>
+													<tr>
+														<td style="padding:3px 0; border:none;"><span class="text-muted">L.G.A:</span></td>
+														<td style="padding:3px 0; border:none;"><?php echo $lga;?></td>
+													</tr>
+												</tbody>
+											</table>
+																										
+							
+														</div>
+														<div class="col-sm-4">
+																<h3>Parent Info</h3>
+															<table class="table table-hover">
+												
+																<tbody>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Name:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $pfullname;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Occupation:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $occupation;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Mobile No. 1:</span> </td>
+																		<td style="padding:3px 0; border:none;"><?php echo $pmobile1;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Mobile No. 2:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $pmobile2;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Email:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $pemail;?></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+												</div>
+												<div class="row">
+				
+														<div class="col-sm-3 profile-pic hidden-xs">
+															
+															<div class="padding-10 hidden-xs">
+																
+
+															</div>
+														</div>
+												<div class="col-sm-4">
+													
+															<h3>Academic Info</h3>
+
+															<table class="table table-hover">
+														<tbody>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Admission Date:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $admdate;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Admission Year:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $yearadmn;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Admission Term:</span> </td>
+																		<td style="padding:3px 0; border:none;"><?php echo $termadmn;?></td>
+																	</tr>
+
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Section Admitted:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $sectionsadmn;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Class Admitted:</span> </td>
+																		<td style="padding:3px 0; border:none;"><?php echo $classadmn;?></td>
+																	</tr>
+																	
+																</tbody>
+															</table>
+														</div>
+
+														<div class="col-sm-4">
+																<h3>Next OF Kin</h3>
+															<table class="table table-hover">
+												
+																<tbody>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Name:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $nokname;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Mobile:</span></td>
+																		<td style="padding:3px 0; border:none;"><?php echo $nokmobile;?></td>
+																	</tr>
+																	<tr>
+																		<td style="padding:3px 0; border:none;"><span class="text-muted">Relationship:</span> </td>
+																		<td style="padding:3px 0; border:none;"><?php echo $nokrel;?></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+				
+														</div>
+				
+													</div>
+				
+												</div>
+				
+											</div>
+				
+											
+											<!-- end row -->
+				
+										</div>
+				
+									</div>
+									
+				
+									</div>
+								</div>
+				
+							</div>
+				
+				
+					</div>
+				
+				</div>
+</article>
+

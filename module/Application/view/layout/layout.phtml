@@ -12,20 +12,16 @@
 
         <!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/style.css')
-                    
-                        
-                        
-                   
+                     ->prependStylesheet($this->basePath() . '/css/style.css')
                      ->prependStylesheet($this->basePath() . '/bot/bootstrap-table.css')
-                        ->prependStylesheet($this->basePath() . '/css/demo.min.css')
-                         //->prependStylesheet($this->basePath() . '/css/jquery.dynatable.css') 
-                         ->prependStylesheet($this->basePath() . '/css/erp-rtl.min.css') 
-                             ->prependStylesheet($this->basePath() . '/css/erp-skins.min.css') 
-                              ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
-                        ->prependStylesheet($this->basePath() . '/css/erp-production.min.css')
-                        ->prependStylesheet($this->basePath() . '/css/erp-production-plugins.min.css')
-                            ->prependStylesheet($this->basePath() . '/css/font-awesome.min.css')
+                     ->prependStylesheet($this->basePath() . '/css/demo.min.css')
+                       //->prependStylesheet($this->basePath() . '/css/jquery.dynatable.css') 
+                     ->prependStylesheet($this->basePath() . '/css/erp-rtl.min.css') 
+                     ->prependStylesheet($this->basePath() . '/css/erp-skins.min.css') 
+                     ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                     ->prependStylesheet($this->basePath() . '/css/erp-production.min.css')
+                     ->prependStylesheet($this->basePath() . '/css/erp-production-plugins.min.css')
+                     ->prependStylesheet($this->basePath() . '/css/font-awesome.min.css')
                        ?>
 
         <!-- Scripts -->
@@ -49,16 +45,14 @@
 
       </div>
 
-      <div class="project-context ">
+      <div class="project-context">
 
         <span class="label"><strong><?php echo $this->translate('Welcome'); ?>, <?php echo $this->zfcUserDisplayName() ?>! </strong></span>
         <span class="project-selector dropdown-toggle" >     
          <?php $sessions=$this->myHelper();
          if(!empty($sessions)){
-            foreach ($sessions as $session):
-           $year = $this->escapeHtml($session['year']['name']);
-           $term = $this->escapeHtml($session['term']['name']);
-           endforeach; 
+          $year=$sessions->getYear()->getName();
+          $term=$sessions->getTerm()->getName();
        echo '      Academic Session :' .$year.' - '.$term;}?></span>
 
         <!-- Suggestion: populate this list with fetch and push technique -->
@@ -395,7 +389,7 @@
             ->prependFile($this->basePath() . '/js/smartwidgets/jarvis.widget.min.js')
           
             ->prependFile($this->basePath() . '/js/plugin/select2/select2.min.js')
-           // ->prependFile($this->basePath() . '/js/demo.min.js')
+            ->prependFile($this->basePath() . '/js/demo.min.js')
             ->prependFile($this->basePath() . '/js/jquery.print.js')
          
            ->prependFile($this->basePath() . '/js/plugin/summernote/summernote.min.js')

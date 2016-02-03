@@ -1,23 +1,29 @@
 <?php
 /**
- * Cloud Base Educational Management System
+ * Cloud Base School Management System
  *
  * @author Isaac Bitrus 
  * @copyright Copyright (c) 2015 Edusoft (http://www.edusoft.com.ng)
  */
  
 namespace Admin\Form;
-use DoctrineModule\Persistence\ObjectManagerAwareInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+
+use Admin\Entity\Classes;
 use Zend\Form\Form;
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
-class ClassesForm extends Form implements ObjectManagerAwareInterface
-{ protected $objectManager;
+class ClassesForm extends Form
+{   protected $objectManager;
+
     public function __construct(ObjectManager $objectManager)
-    {   $this->setObjectManager($objectManager);
-
-        parent::__construct('classes');
-        $this->setAttribute('method', 'post');
+    {
+         parent::__construct('classes');
+         $this->setAttribute('method', 'post');
+         $this->setHydrator(new DoctrineHydrator($objectManager))
+             ->setObject(new Classes());
+             $this->objectManager=$objectManager;
+   
        
 
          $this->add(array(
@@ -26,7 +32,7 @@ class ClassesForm extends Form implements ObjectManagerAwareInterface
             'options' => array(
                 'label' => 'section',
                 'empty_option' => 'Select Section',
-                'object_manager' => $this->getObjectManager(),
+                'object_manager' => $objectManager,
                 'target_class' => 'Admin\Entity\Section',
                 'property' => 'name'
             ),
@@ -39,56 +45,59 @@ class ClassesForm extends Form implements ObjectManagerAwareInterface
 
         $this->add(array(
             'name' => 'initial',
-            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'type' => 'Zend\Form\Element\Select',
             'options' => array(
-                'label' => 'initial',
+                'label' => 'religion',
                 'empty_option' => 'Select Initial',
-                'object_manager' => $this->getObjectManager(),
-                'target_class' => 'Admin\Entity\Initial',
-                'property' => 'name'
+                'value_options' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '4' => '4',
+                    '5' => '5',
+                    '6' => '6',
+                ),
             ),
             'attributes' => array(
                 'required' => true,
-                'class' =>'select2'
+                'class' =>'select2',
+                 'id'=>'classes'     
             )
         ));
 
         $this->add(array(
             'name' => 'arm',
-            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'type' => 'Zend\Form\Element\Select',
             'options' => array(
-                'label' => 'arm',
+                'label' => 'religion',
                 'empty_option' => 'Select Arm',
-                'object_manager' => $this->getObjectManager(),
-                'target_class' => 'Admin\Entity\Arms',
-                'property' => 'name'
+                'value_options' => array(
+                    'A' => 'A',
+                    'B' => 'B',
+                    'C' => 'C',
+                    'D' => 'D',
+                    'E' => 'E',
+                    'F' => 'F',
+                    'G' => 'G',
+                    'H' => 'H',
+                ),
             ),
             'attributes' => array(
                 'required' => true,
-                'class' =>'select2'
+                'class' =>'select2',
+                 'id'=>'classes'     
             )
         ));
 
-       
-            
+              
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'New class',
+                'value' => 'Add class',
                 'class' => 'btn btn-primary',
             ),
         )); 
     }
-    public function setObjectManager(ObjectManager $objectManager)
-    {
-        $this->objectManager = $objectManager;
-
-        return $this;
-    }
-
-    public function getObjectManager()
-    {
-        return $this->objectManager;
-    }
+   
 }

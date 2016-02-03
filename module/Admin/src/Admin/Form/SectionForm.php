@@ -1,78 +1,76 @@
-<?php
+<?php 
 namespace Admin\Form;
+
+use Admin\Entity\Section;
+use Zend\Form\Form;
+use Zend\InputFilter\InputFilterProviderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use Zend\Form\Form;
 
-class SectionForm extends Form
-{
-     public function __construct(ObjectManager $objectManager){
+
+class SectionForm extends Form implements InputFilterProviderInterface
+{  protected $objectManager;
+    public function __construct(ObjectManager $objectManager)
+    {
         parent::__construct('section');
-        $this->setAttribute('method', 'post');
-        
+         $this->setAttribute('method', 'post');
+        $this->setHydrator(new DoctrineHydrator($objectManager))
+             ->setObject(new School());
+             $this->objectManager=$objectManager;
+   
 
         $this->add(array(
-            'name'=>'id',
-            'attributes'=>array(
-                'type'=>'hidden',)
-            ,
-            ));
+            'type' => 'Zend\Form\Element\Hidden',
+            'name' => 'id'
+        ));
 
-        $this->add(array(
+       
+         $this->add(array(
             'name' => 'name',
             'attributes' => array(
                 'type'  => 'text',
-                'placeholder' =>'Enter section name',
+                'placeholder' =>'Enter Section Name',
                 'class' =>'form-control',
+                'id'=>'name',
+                'required' => true,
             ),
-            'options' => array(
-                'label' => 'Name',
-            ),
-            'label_attributes' => array(
-                'class' => 'input', 
-                ),
-        ));
 
-         $this->add(array(
-            'name' => 'shortname',
-            'attributes' => array(
-                'type'  => 'text',
-                'placeholder' =>'Enter short name',
-                'class' =>'form-control',
-            ),
-            'options' => array(
-                'label' => 'shortname',
-            ),
-            'label_attributes' => array(
-                'class' => 'input', 
-                ),
         ));
 
 
-        $subjectFieldset = new SubjectFieldset($objectManager);
-        $this->add(array(
-            'type'    => 'DoctrineModule\Form\Element\ObjectMultiCheckbox',
-            'name' => 'subject',
-            'options' => array(
-                'label' => 'Select Subjects',
-                'object_manager' => $objectManager,
-                'should_create_template' => true,
-                'target_class'   => 'Admin\Entity\Subject',
-                'property'       => 'name',
-                'target_element' => $subjectFieldset,
-              ),
-        ));
-      
-        
-        
-            
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Add',
+                'value' => 'Add Section',
                 'class' => 'btn btn-primary',
             ),
         )); 
+
+     
+   }
+         public function getInputFilterSpecification()
+        {
+            return array(
+            'name' => array(
+                'validators' => array(
+                    array(
+                        'name' => 'DoctrineModule\Validator\NoObjectExists',
+                        'options' => array(
+                            'object_repository' =>$this->objectManager->getRepository('Admin\Entity\Section'),
+                            'fields' => 'name',
+                            'messages' => array(
+                            'objectFound' => 'This section already exists !'
+                            ),
+                        )
+                    )
+                )
+            ),
+        );
+
     }
-}
+       
+  }
+
+
+ 

@@ -1,126 +1,78 @@
-<article class="col-xs-12 col-sm-6 col-md-12 col-lg-10">
+ <article class="col-xs-12 col-sm-10 col-md-7 col-lg-7">
 
-    
-<div class="jarviswidget jarviswidget-color-Darken" id="wid-id-18" style="margin-left:10%; margin-right:10%">
-        <!-- widget options:
-        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-        data-widget-colorbutton="false" 
-        data-widget-editbutton="false"
-        data-widget-togglebutton="false"
-        data-widget-deletebutton="false"
-        data-widget-fullscreenbutton="false"
-        data-widget-custombutton="false"
-        data-widget-collapsed="true" 
-        data-widget-sortable="false"   
-                                -->
-             <header>
-                <h2><strong>MANAGE SECTION</strong></h2>               
-             </header>
-                <!-- widget div-->
-    <div>       
-       <!-- widget edit box -->
-         <div class="jarviswidget-editbox">
-            <!-- This area used as dropdown edit box -->
-            <input class="form-control" type="text">
-            <span class="note"><i class="fa fa-check text-success"></i> Change title to update and save instantly!</span>      
-          </div>
-                <!-- end widget edit box -->
-                <!-- widget content -->
-            <div class="widget-body ">
-                <div class="widget-body-toolbar"> 
-                    
-                    <div class="row alert alert-info no-margin fade in"> 
-                        
-                        <?php $form = $this->form;
-                        $form->setAttribute('action', $this->url('section',array('action'=> 'add','controller' => 'section')));
-                      //  $form->setAttribute('role', 'form-horizontal');
-                       // $form->setAttribute('class', 'form-inline');
-                        $form->setAttribute('class', 'smart-form');
-                        $form->prepare(); ?>
-                        <?php echo $this->form()->openTag($form); ?>
-                
-                                       
-                        <div class="row"> 
-                        
-                        <section class="col col-5">
-                            <label class="input"><i class="icon-append fa fa-tags"></i>
-                               <?php echo $this->formElementErrors($form->get('name')); ?>
-                                <?php echo $this->formInput($form->get('name')); ?> 
-                            </label>
-                        </section>
+    <div class="jarviswidget" id="wid-id-9004">
 
-                         <section class="col col-5">
-                            <label class="input"><i class="icon-append fa fa-tags"></i>
-                                 <?php echo $this->formElementErrors($form->get('shortname')); ?>
-                                <?php echo $this->formInput($form->get('shortname')); ?>  
-                            </label>
-                        </section>
+        <header>
+            <h2>Sections</h2>
+        </header><!-- widget div-->
 
-                        <section class="col col-2">
-                           <?php echo $this->formRow($form->get('submit')); ?>
-                        </section>
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+                <input class="form-control" type="text">
+            </div><!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+                  
+                                 <a data-toggle="modal" data-target="#edit" href="<?php echo $this->url('section',array('controller' => 'section','action'=>'add'));?>" class="btn btn-primary">
+                                     <i class="fa fa-plus"></i> <span class="hidden-mobile">Add New Section</span>
+                                 </a>
+                                 
                         </div>
-                        <?php echo $this->form()->closeTag(); ?>
-                        
-                              
-                    </div>
-                
-                </div>
-                                        
-                <div class="custom-scroll table-responsive" style="height:290px; overflow-y: scroll;">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Short Name</th>
-                                <th>Link subject to section</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead><?php foreach ($sections as $section) : ?>
-                        <tbody>
-                            <tr>
-                    <td><?php echo $this->escapeHtml($section->getName());?></td>
-                    <td><?php echo $this->escapeHtml($section->getShortname());?></td>
-                        <td>
-<a href="<?php echo $this->url('section',array('controller' => 'section','action'=>'editsection', 'id' => $section->getid()));?>"><button class="btn btn-xs btn-success"><i class='glyphicon glyphicon-link'></i></button></a>
-                    </td>
-                    
-                    <td>
-<a data-toggle="modal"  data-target="#sect" href="<?php echo $this->url('section',array('controller' => 'section','action'=>'edit', 'id' => $section->getid()));?>"><button class="btn btn-xs btn-info"><i class='fa fa-pencil'></i></button></a>
+                     </div>
+                </div> 
 
-<a id="conf" href="<?php echo $this->url('section',array('controller' => 'section','action'=>'delete', 'id' => $section->getid()));?>"onclick="return confirm('Do you rely want to delete this section?')"><button class="btn btn-xs btn-danger"><i class='glyphicon glyphicon-trash'></i></button></a>
-                    </td>                                                        
-                        </tr><?php endforeach; ?>
+
+
+    <table id="schooltable" data-show-export="true" data-pagination="true" data-click-to-select="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-bordered">
+                        <thead> 
+                            <tr>
+                                <th>Section Name</th>
+                                <th>Action</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if($sections):?>         
+                    <?php foreach ($sections as $section) : ?>
+                            <tr> 
+        
+        <td><?php echo $this->escapeHtml($section->getName());?></td>
+        
+        <td>
+<a data-toggle="modal" data-target="#edit" href="<?php echo $this->url('section',array('controller' => 'section','action'=>'edit', 'id'=>$section->getId()));?>"><button type="button" class="btn btn-xs btn-info "><i class="fa fa-pencil"></i> edit</button></a>
+
+<a  href="<?php echo $this->url('section',array('controller' => 'section','action'=>'delete', 'id'=>$section->getId()));?>"><button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> delete</button></a>
+        </td>
+                            </tr> 
+                           <?php endforeach; ?><?php endif;?>
                         </tbody>
                     </table>
-                </div>
-        
-          </div>
-                                    <!-- end widget content --> 
-        </div>
-        <!-- end widget div -->   
-    </div>
-    <!-- end widget -->
+                                        
+
+
+     </div><!-- end widget content -->
+        </div><!-- end widget div -->
+    </div><!-- end widget -->
 </article>
 
-<!-- MODAL FOR EDITING ACADEMIC SESSION -->
-<div class="modal fade" id="sect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="width:900px;">
             
            
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
-<!-- END OF MODAL FOR EDITING ACADEMIC SESSION-->
 
-
-
-
- <script type="text/javascript">
-  
-    
-    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+                <script>
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
      *
      * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
      *
@@ -178,9 +130,15 @@
     // pagefunction
     
     var pagefunction = function() {
-        // clears the variable if left blank
+         $('#schooltable').bootstrapTable({
+
+            });
     };
+     loadScript("/bot/bootstrap-table.js", pagefunction);
+
+
     
+    //loadScript("js/edusoft.js", pagefunction);
     // end pagefunction
 
     // destroy generated instances 
@@ -206,6 +164,5 @@
     
     // run pagefunction
     pagefunction();
-  
 
 </script>

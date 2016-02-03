@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="lga")
  * @ORM\Entity
  */
-class Lga
+class Lga implements LgaInterface
 {
     /**
      * @var integer
@@ -43,7 +43,17 @@ class Lga
     private $state;
 
    
-    
+           /**
+     * Set id.
+     *
+     * @param int $id
+     * @return LgaInterface
+     */
+    public function setId($id)
+    {
+        $this->id = (int) $id;
+        return $this;
+    }
 
    
     /**
@@ -60,7 +70,7 @@ class Lga
      * Set name
      *
      * @param string $name
-     * @return Lga
+     * @return LgaInterface
      */
     public function setName($name)
     {
@@ -83,7 +93,7 @@ class Lga
      * Set code
      *
      * @param string $code
-     * @return Lga
+     * @return LgaInterface
      */
     public function setCode($code)
     {
@@ -106,7 +116,7 @@ class Lga
      * Set state
      *
      * @param State $state
-     * @return Applicant
+     * @return LgaInterface
      */
     public function setState(State $state)
     {

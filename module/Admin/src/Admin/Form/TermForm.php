@@ -1,45 +1,43 @@
-<?php
+<?php 
 namespace Admin\Form;
 
-
+use Admin\Entity\TErm;
 use Zend\Form\Form;
-use Admin\Entity\Term;
+use Zend\InputFilter\InputFilterProviderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
-class TermForm extends Form
-{
-     public function __construct(ObjectManager $objectManager)
+
+class TermForm extends Form implements InputFilterProviderInterface
+{  protected $objectManager;
+    public function __construct(ObjectManager $objectManager)
     {
         parent::__construct('term');
-
-        $this->setHydrator(new DoctrineHydrator($objectManager,'Admin\Entity\Term'))
+         $this->setAttribute('method', 'post');
+        $this->setHydrator(new DoctrineHydrator($objectManager))
              ->setObject(new Term());
-
-          $this->add(array(
-            'name'=>'id',
-            'attributes'=>array(
-                'type'=>'hidden',)
-            ,
-            ));
+             $this->objectManager=$objectManager;
+   
 
         $this->add(array(
+            'type' => 'Zend\Form\Element\Hidden',
+            'name' => 'id'
+        ));
+
+       
+         $this->add(array(
             'name' => 'name',
             'attributes' => array(
                 'type'  => 'text',
-                'placeholder' =>'Term name',
+                'placeholder' =>'Enter Term Name',
                 'class' =>'form-control',
+                'id'=>'name',
+                'required' => true,
+            ),
 
-            ),
-            'options' => array(
-                'label' => 'Term Name',
-            ),
-            'label_attributes' => array(
-                'class' => 'input', 
-                ),
         ));
-        
-            
+
+
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
@@ -49,4 +47,30 @@ class TermForm extends Form
             ),
         )); 
     }
-}
+     
+   
+         public function getInputFilterSpecification()
+        {
+            return array(
+            'name' => array(
+                'validators' => array(
+                    array(
+                        'name' => 'DoctrineModule\Validator\NoObjectExists',
+                        'options' => array(
+                            'object_repository' =>$this->objectManager->getRepository('Admin\Entity\Term'),
+                            'fields' => 'name',
+                            'messages' => array(
+                            'objectFound' => 'This term already exists !'
+                            ),
+                        )
+                    )
+                )
+            ),
+        );
+
+    }
+       
+  }
+
+
+ 

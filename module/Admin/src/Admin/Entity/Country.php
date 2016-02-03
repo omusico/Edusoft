@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="country")
  * @ORM\Entity
  */
-class Country
+class Country implements CountryInterface
 {
     /**
      * @var integer
@@ -37,7 +37,17 @@ class Country
 
    
     
-
+       /**
+     * Set id.
+     *
+     * @param int $id
+     * @return CountryInterface
+     */
+    public function setId($id)
+    {
+        $this->id = (int) $id;
+        return $this;
+    }
    
     /**
      * Get id
@@ -53,7 +63,7 @@ class Country
      * Set name
      *
      * @param string $name
-     * @return Country
+     * @return CountryInterface
      */
     public function setName($name)
     {
@@ -76,7 +86,7 @@ class Country
      * Set code
      *
      * @param string $code
-     * @return Country
+     * @return CountryInterface
      */
     public function setCode($code)
     {
